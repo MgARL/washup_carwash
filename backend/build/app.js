@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.app = void 0;
 const express_1 = __importDefault(require("express"));
 const users_1 = require("./controllers/users");
 const appointments_1 = require("./controllers/appointments");
@@ -11,7 +10,6 @@ const services_1 = require("./controllers/services");
 const vehicles_1 = require("./controllers/vehicles");
 require('dotenv').config();
 const app = (0, express_1.default)();
-exports.app = app;
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 //  controllers
@@ -24,3 +22,4 @@ app.get('*', (req, res) => {
         message: 'Not Found'
     });
 });
+exports.default = app;

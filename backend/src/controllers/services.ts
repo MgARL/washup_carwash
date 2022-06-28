@@ -7,4 +7,4 @@ services.get('/', async (req: any, res: any) => {
     })
 })
 
-export { services }
+export default services 

@@ -7,4 +7,4 @@ appointments.get('/', async (req: any, res: any) => {
     })
 })
 
-export { appointments }
+export default appointments 

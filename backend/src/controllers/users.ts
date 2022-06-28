@@ -7,4 +7,4 @@ users.get('/', async (req: any, res: any) => {
     })
 })
 
-export { users }
+export default users 

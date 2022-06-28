@@ -7,4 +7,4 @@ vehicles.get('/', async (req: any, res: any) => {
     })
 })
 
-export { vehicles }
+export default vehicles 
