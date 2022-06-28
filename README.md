@@ -88,8 +88,9 @@
     - Delete/Cancel Appointment
 
 #### Models:
-- Users:
+- User:
     - UUID Primary Key Default:UUIDV4
+    - Name string not null
     - Email unique string not null
     - Password string not null
     -Name String not null
@@ -97,20 +98,28 @@
     - City String not null
     - State Enum not null
     - Country Enum not null
-- Services:
+- Service:
     - UUID Primary Key Default:UUIDV4
     - service_name string not null
     - service_price integer not null
     - Service_duration integer not null
-- vehicles :
+- vehicle :
     - Uuid Primary Key Default:UUIDV4
     - User_id foreign key not null
     - Make string not null
     - Model string not null
     - Year INT not null
-- Appointments
+    - Type enum ['sedan', 'non-sedan']
+- Appointment
     - UUID primary Key Default:UUIDV4
-    - Service_id not null Foreign key 
     - User_id not null Foreign key
     - Date date_only  not null
     - Time time not null
+- service_appointment
+    - id UUID default UUIDV4 Primary Key
+    - service_id UUID not null Foreign Key
+    - appointment_id UUID not null Foreign Key
+- vehicle_appointment 
+    - id UUID default UUIDV4 Primary Key
+    - vehicle_id UUID not null Foreign Key
+    - appointment_id UUID not null Foreign Key
