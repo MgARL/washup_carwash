@@ -1,7 +1,7 @@
-import express from 'express'
-const services = express.Router()
+import express, { Router, Request, Response } from 'express'
+const services: Router = express.Router()
 
-services.get('/', async (req: any, res: any) => {
+services.get('/', async (req: Request, res: Response) => {
     res.status(200).json({
         message: 'You are at services/'
     })

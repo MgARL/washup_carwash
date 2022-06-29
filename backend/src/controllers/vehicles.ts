@@ -1,7 +1,7 @@
-import express from 'express'
-const vehicles = express.Router()
+import express, {Router, Request, Response} from 'express'
+const vehicles: Router = express.Router()
 
-vehicles.get('/', async (req: any, res: any) => {
+vehicles.get('/', async (req: Request, res: Response) => {
     res.status(200).json({
         message: 'You are at vehicles/'
     })

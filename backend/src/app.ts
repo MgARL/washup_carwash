@@ -1,15 +1,17 @@
-import express, { Application, Request, Response} from 'express'
-import  users  from './controllers/users'
-import  appointments  from './controllers/appointments'
-import  services  from './controllers/services'
-import  vehicles  from './controllers/vehicles'
+import express, { Application, Request, Response } from 'express'
 require('dotenv').config()
- const app: Application = express()
 
- 
+import users from './controllers/users'
+import appointments from './controllers/appointments'
+import services from './controllers/services'
+import vehicles from './controllers/vehicles'
 
- app.use(express.urlencoded({ extended: true }))
- app.use(express.json())
+const app: Application = express()
+
+
+
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 //  controllers
 app.use('/users', users)
@@ -17,10 +19,10 @@ app.use('/appointments', appointments)
 app.use('/services', services)
 app.use('/vehicles', vehicles)
 
-app.get('*', (req: Request,res: Response) => {
+app.get('*', (req: Request, res: Response) => {
     res.status(404).json({
         message: 'Not Found'
     })
 })
 
- export default app
+export default app
