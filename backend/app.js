@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
 
+const admins = require('./controllers/admins')
 const users =  require('./controllers/users')
 const appointments = require('./controllers/appointments')
 const services = require('./controllers/services')
@@ -18,6 +19,7 @@ app.use(cors({
 }))
 
 //  controllers
+app.use('/admins', admins)
 app.use('/users', users)
 app.use('/appointments', appointments)
 app.use('/services', services)

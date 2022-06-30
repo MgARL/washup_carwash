@@ -102,7 +102,7 @@
     - UUID Primary Key Default:UUIDV4
     - service_name string not null
     - service_price integer not null
-    - Service_duration integer not null
+    - Service_duration integer(minutes) not null
 - vehicle :
     - Uuid Primary Key Default:UUIDV4
     - User_id foreign key not null
