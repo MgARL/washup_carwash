@@ -110,7 +110,7 @@
     - Model string not null
     - Year INT not null
     - Type enum ['sedan', 'non-sedan']
-- Appointment
+- Appointment: 
     - UUID primary Key Default:UUIDV4
     - User_id not null Foreign key
     - Date date_only  not null

@@ -13,6 +13,9 @@ const app = express()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cors({
+    origin: "*" //use array for multiple sites ie. ['google.com', 'apple.com']
+}))
 
 //  controllers
 app.use('/users', users)
