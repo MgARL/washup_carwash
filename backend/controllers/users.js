@@ -54,9 +54,9 @@ users.post('/login', async (req,res) => {
 })
 
 users.put('/update', async (req, res) => {
-    const {user_id , ...rest } = req.body
+    const {user_id, password , ...rest } = req.body
     try {
-        await user.update(rest, {
+        await user.update( rest, {
             where: {
                 user_id
             }

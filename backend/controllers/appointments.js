@@ -1,9 +1,133 @@
 const appointments = require('express').Router()
+const e = require('express')
+const db = require('../models')
 
-appointments.get('/', async (req, res) => {
-    res.status(200).json({
-        message: 'You are at appointments/'
-    })
+const { appointment, vehicle_appointment, service_appointment, service, vehicle } = db
+
+appointments.get('/user-all', async (req, res) => {
+    try {
+        const allAppointments = await appointment.findAll({
+            where: {
+                user_id: req.query.user_id
+            },
+            include: [service, vehicle]
+        })
+        if (allAppointments){
+            console.log('sent')
+            return res.status(200).json({
+                allAppointments
+            })
+        }
+        res.status(404).json({
+            message: 'No Appointments Found'
+        })
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'something went wrong please try again'
+        })
+    }
 })
+
+appointments.get('/user-one', async (req, res) => {
+    try {
+        const Appointment = await appointment.findOne({
+            where: {
+                appointment_id: req.query.appointment_id
+            },
+            include: [service, vehicle]
+        })
+        if(Appointment){
+            return res.status(200).json({
+                Appointment
+            })
+        }
+        res.status(404).json({
+            message: 'Appointment not found'
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'something went wrong please try again'
+        })
+    }
+})
+
+appointments.post('/create', async (req, res) => {
+    const { service_ids, vehicle_ids, ...rest } = req.body
+    try {
+        const Appointment = await appointment.create({
+            ...rest
+        })
+        if (Appointment) {
+            await service_ids.map(async (service_id) => {
+                const Service = await service.findOne({
+                    where: {
+                        service_id
+                    }
+                })
+                await Appointment.addService(Service)
+            })
+
+            await vehicle_ids.map(async (vehicle_id) => {
+                const Vehicle = await vehicle.findOne({
+                    where: {
+                        vehicle_id
+                    }
+                })
+                await Appointment.addVehicle(Vehicle)
+            })
+            res.status(201).json({
+                appointment_id: Appointment.appointment_id
+            })
+        } else {
+            res.status(500).json({
+                message: 'Please try again'
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'something went wrong please try again'
+        })
+    }
+})
+
+appointments.put('/update', async (req, res) => {
+    const { appointment_id, ...rest } = req.body
+    try {
+        await appointment.update( rest, {
+            where: {
+                appointment_id
+            }
+        })
+
+        res.status(204).end()
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'something went wrong please try again'
+        })
+    }
+})
+
+appointments.delete('/delete', async (req, res) => {
+    const { appointment_id } = req.body
+    try {
+        await appointment.destroy({
+            where: {
+                appointment_id
+            }
+        })
+        res.status(204).end()
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'something went wrong please try again'
+        })
+    }
+})
+
 
 module.exports = appointments
