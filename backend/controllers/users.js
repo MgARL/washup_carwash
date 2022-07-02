@@ -1,13 +1,14 @@
 const users = require('express').Router()
 require('dotenv').config()
 const db = require('../models')
+const userAuthorization = require('../middleware/user_auth')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const { user } = db
 
 users.post('/signup', async (req, res) => {
-    const { password, ...rest } = req.body
+    const { password, role, ...rest } = req.body
     try {
         const User = await user.create({
             ...rest,
@@ -53,8 +54,8 @@ users.post('/login', async (req,res) => {
     }
 })
 
-users.put('/update', async (req, res) => {
-    const {user_id, password , ...rest } = req.body
+users.put('/update', userAuthorization, async (req, res) => {
+    const { user_id, password , ...rest } = req.body
     try {
         await user.update( rest, {
             where: {
@@ -71,7 +72,7 @@ users.put('/update', async (req, res) => {
     }
 })
 
-users.delete('/delete', async (req, res) => {
+users.delete('/delete', userAuthorization, async (req, res) => {
     try {
         await user.destroy({
             where: {

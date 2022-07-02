@@ -11,6 +11,9 @@ const vehicles = require('./controllers/vehicles')
 const app = express()
 
 
+// Middleware
+const userAuthorization = require('./middleware/user_auth')
+const adminAuthorization = require('./middleware/admin_auth')
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -19,11 +22,11 @@ app.use(cors({
 }))
 
 //  controllers
-app.use('/admins', admins)
+app.use('/admins', adminAuthorization, admins)
 app.use('/users', users)
-app.use('/appointments', appointments)
+app.use('/appointments', userAuthorization, appointments)
 app.use('/services', services)
-app.use('/vehicles', vehicles)
+app.use('/vehicles', userAuthorization ,vehicles)
 
 app.get('*', (req, res) => {
     res.status(404).json({

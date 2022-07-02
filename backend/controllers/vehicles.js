@@ -6,11 +6,16 @@ vehicles.get('/all', async (req, res) => {
     try {
         const allVehicles = await vehicle.findAll({
             where: {
-                user_id: req.query.user_id
+                user_id: req.body.user_id
             }
         })
-        res.status(200).json({
-            allVehicles
+        if(allVehicles.length >= 1){
+            return res.status(200).json({
+                allVehicles
+            })
+        }
+        res.status(404).json({
+            message: 'No vehicles found'
         })
 
     } catch (error) {
@@ -58,7 +63,7 @@ vehicles.get('/vehicle', async (req, res) => {
 })
 
 vehicles.put('/update', async (req, res) => {
-    const { vehicle_id, ...rest } = req.body
+    const { user_id, vehicle_id, ...rest } = req.body
     try {
         await vehicle.update(rest, {
             where: {

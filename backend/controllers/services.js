@@ -1,9 +1,10 @@
 const services = require('express').Router()
 const db = require('../models')
+const adminAuthorization = require('../middleware/admin_auth')
 
 const { service } = db
 
-services.get('/', async (req, res) => {
+services.get('/all', async (req, res) => {
     try {
         const allServices = await service.findAll()
         res.status(200).json({
@@ -35,7 +36,7 @@ services.get('/get-one', async (req, res) => {
     }
 })
 
-services.post('/add', async (req, res) => {
+services.post('/add', adminAuthorization, async (req, res) => {
     const { ...rest } = req.body
     try {
         const Service = await service.create({
@@ -53,7 +54,7 @@ services.post('/add', async (req, res) => {
     }
 })
 
-services.put('/update', async (req, res) => {
+services.put('/update', adminAuthorization, async (req, res) => {
     const { service_id, ...rest } = req.body
     try {
         await service.update(rest, {
@@ -70,7 +71,7 @@ services.put('/update', async (req, res) => {
     }
 })
 
-services.delete('/delete', async (req, res) => {
+services.delete('/delete', adminAuthorization, async (req, res) => {
     try {
         await service.destroy({
             where: {
