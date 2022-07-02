@@ -8,7 +8,7 @@ appointments.get('/user-all', async (req, res) => {
     try {
         const allAppointments = await appointment.findAll({
             where: {
-                user_id: req.query.user_id
+                user_id: req.body.user_id
             },
             include: [service, vehicle]
         })
@@ -55,7 +55,7 @@ appointments.get('/user-one', async (req, res) => {
 })
 
 appointments.post('/create', async (req, res) => {
-    const { service_ids, vehicle_ids, ...rest } = req.body
+    const { user_id, service_ids, vehicle_ids, ...rest } = req.body
     try {
         const Appointment = await appointment.create({
             ...rest
@@ -95,7 +95,7 @@ appointments.post('/create', async (req, res) => {
 })
 
 appointments.put('/update', async (req, res) => {
-    const { appointment_id, ...rest } = req.body
+    const { user_id, appointment_id, ...rest } = req.body
     try {
         await appointment.update( rest, {
             where: {
