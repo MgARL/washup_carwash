@@ -13,6 +13,7 @@ import Navigation from "./components/Navigation/Navigation";
 import Landing from "./components/Landing";
 import Dashboard from "./components/Dashboard";
 import Footer from "./components/Footer";
+import Signup from "./components/Signup";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -21,9 +22,15 @@ function App() {
       <Router>
         <GlobalContext.Provider value={{ setLoggedIn }}>
           <Navigation loggedIn={loggedIn} />
-          <Routes>
-            <Route path="/" element={loggedIn ? <Dashboard /> : <Landing />} />
-          </Routes>
+          <main className="footer-fill">
+            <Routes>
+              <Route
+                path="/"
+                element={loggedIn ? <Dashboard /> : <Landing />}
+              />
+              <Route path="/signup" element={<Signup />} />
+            </Routes>
+          </main>
           <Footer />
         </GlobalContext.Provider>
       </Router>

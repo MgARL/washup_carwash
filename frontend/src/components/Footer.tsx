@@ -14,7 +14,7 @@ import {
 
 function Footer() {
   return (
-    <Container style={{ background: "lightblue" }} fluid className="pb-4">
+    <Container  fluid className="pb-4 bg1">
       <Row>
         <Col sm={12}>
           {" "}
