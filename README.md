@@ -9,11 +9,12 @@
 ### Front-end: 
 - Home/landing page of service 
     - one page
-    - about us section
+    - Home
         - Service description 
         - Call to action button(sign-up and schedule service)\
     - Pricing Section
         - Service sPricing cards section
+    - About us section
 - Sign-up page and form
     - Form will ask for
         - Name
@@ -32,8 +33,9 @@
         - sign up button
     - Logged in comp
         - dashboard
-        - All Appointments
+        - Appointments
         - Profile
+        - Logout Button
 - Logged in Page/Dashboard
      - Upcoming three appointments from soonest if any
         - In the upcoming appointment a button for more details

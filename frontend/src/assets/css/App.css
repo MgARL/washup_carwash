@@ -1,0 +1,7 @@
+.App {
+  text-align: center;
+}
+
+.footer-fill {
+  height: calc(100vh - 460px);
+}

@@ -1,14 +1,32 @@
-import React from 'react';
-import logo from './assets/images/logo_no_bg.png';
-import './App.css';
+import { useState } from "react";
+import "./assets/css/App.css";
+
+//Importing Dependencies
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+// context
+import { GlobalContext } from "./contexts/GlobalContext";
+
+//Components
+import Navigation from "./components/Navigation/Navigation";
+import Landing from "./components/Landing";
+import Dashboard from "./components/Dashboard";
+import Footer from "./components/Footer";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>WashApp Carwash</h1>
-      </header>
+      <Router>
+        <GlobalContext.Provider value={{ setLoggedIn }}>
+          <Navigation loggedIn={loggedIn} />
+          <Routes>
+            <Route path="/" element={loggedIn ? <Dashboard /> : <Landing />} />
+          </Routes>
+          <Footer />
+        </GlobalContext.Provider>
+      </Router>
     </div>
   );
 }
