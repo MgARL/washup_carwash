@@ -13,7 +13,8 @@ import Navigation from "./components/Navigation/Navigation";
 import Landing from "./components/Landing";
 import Dashboard from "./components/Dashboard";
 import Footer from "./components/Footer";
-import Signup from "./components/Signup";
+import Signup from "./components/Signup/Signup";
+import Login from "./components/Login";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -29,6 +30,7 @@ function App() {
                 element={loggedIn ? <Dashboard /> : <Landing />}
               />
               <Route path="/signup" element={<Signup />} />
+              <Route path='/login' element={<Login />} />
             </Routes>
           </main>
           <Footer />

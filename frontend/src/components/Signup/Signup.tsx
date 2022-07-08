@@ -9,15 +9,10 @@ import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 // interfaces
-interface FormInputs {
-  name: string;
-  email: string;
-  password: string;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-}
+import { FormInputs } from "../../interfaces_types/interfaces";
+
+// handler Functions
+import { handleOnChange, handleSubmit } from './handlers'
 
 function Signup() {
   const navigate = useNavigate();
@@ -32,31 +27,6 @@ function Signup() {
   };
   const [formInputs, setFormInputs] = useState<FormInputs>(initialInputs);
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormInputs((prevState: FormInputs): FormInputs => {
-      return {
-        ...prevState,
-        [e.target.id]: e.target.value,
-      };
-    });
-  };
-
-  const HandleSubmit = async (e: any) => {
-    e.preventDefault();
-    console.log("HERE", formInputs);
-    const response = await fetch("http://localhost:3001/users/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formInputs),
-    });
-
-    if (response.status === 201) {
-      navigate("/login");
-    } else {
-      console.log("please try again");
-    }
-  };
-
   return (
     <Container className="my-5 bg1">
       <Row className="d-flex justify-content-center">
@@ -68,7 +38,7 @@ function Signup() {
       <Form
         className="pb-5"
         onSubmit={(e: any) => {
-          HandleSubmit(e);
+          handleSubmit(e, formInputs, navigate);
         }}
       >
         <Form.Group controlId="signup">
@@ -77,7 +47,7 @@ function Signup() {
               <FloatingLabel controlId="name" label="Name:">
                 <Form.Control
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleOnChange(e)
+                    handleOnChange(e, setFormInputs)
                   }
                   type="text"
                   maxLength={50}
@@ -92,7 +62,7 @@ function Signup() {
               <FloatingLabel controlId="email" label="Email:">
                 <Form.Control
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleOnChange(e)
+                    handleOnChange(e, setFormInputs)
                   }
                   type="email"
                   maxLength={50}
@@ -107,7 +77,7 @@ function Signup() {
               <FloatingLabel controlId="password" label="Password:">
                 <Form.Control
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleOnChange(e)
+                    handleOnChange(e, setFormInputs)
                   }
                   type="password"
                   minLength={8}
@@ -125,7 +95,7 @@ function Signup() {
               <FloatingLabel controlId="address" label="Address:">
                 <Form.Control
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleOnChange(e)
+                    handleOnChange(e, setFormInputs)
                   }
                   type="text"
                   maxLength={255}
@@ -140,7 +110,7 @@ function Signup() {
               <FloatingLabel controlId="city" label="City:">
                 <Form.Control
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleOnChange(e)
+                    handleOnChange(e, setFormInputs)
                   }
                   type="text"
                   maxLength={50}
@@ -153,7 +123,7 @@ function Signup() {
               <FloatingLabel controlId="state" label="State:">
                 <Form.Control
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleOnChange(e)
+                    handleOnChange(e, setFormInputs)
                   }
                   type="text"
                   maxLength={2}
@@ -168,7 +138,7 @@ function Signup() {
               <FloatingLabel controlId="country" label="Country:">
                 <Form.Control
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleOnChange(e)
+                    handleOnChange(e, setFormInputs)
                   }
                   type="text"
                   maxLength={50}
