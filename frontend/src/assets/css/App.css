@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+}
+
+.footer-fill {
+  min-height: calc(100vh - 425px);
+}
+.bg1{
+  background-color: rgba(217, 217, 217, 0.8);
+}
+
+.thick-line {
+  border: 2px solid black;
+}

@@ -7,9 +7,14 @@
 ## Feature Lists
 
 ### Front-end: 
-- Home/landing page of service
-    - Service description 
-    - Call to action button(sign-up and schedule service)
+- Home/landing page of service 
+    - one page
+    - Home
+        - Service description 
+        - Call to action button(sign-up and schedule service)\
+    - Pricing Section
+        - Service sPricing cards section
+    - About us section
 - Sign-up page and form
     - Form will ask for
         - Name
@@ -18,10 +23,27 @@
         - Address
 - Login Modal
     - Email and password form
+- NavBar 
+    - Not Logged in comp
+        -  top sticky 
+        - logo on left
+        - About us
+        - pricing
+        - login button
+        - sign up button
+    - Logged in comp
+        - dashboard
+        - Appointments
+        - Profile
+        - Logout Button
 - Logged in Page/Dashboard
-     - Upcoming Appointments if any
+     - Upcoming three appointments from soonest if any
         - In the upcoming appointment a button for more details
     - Call to action Button to Schedule Appointment
+- All Appointments
+    - List of all appointments upcoming and past
+    - arranged from latest( appointment that will happen furthers to the future) to oldest
+    - add a more details button to each appointment
 - Profile
     - Display Information
     - Edit/update Information
@@ -33,8 +55,9 @@
     - Vehicle Type
 -Appointment Details page
     - Display information about appointment
-    - Reschedule Button
-    - Cancel Button
+    - if appointment hasn't happened and its more than 24 hours from now display:
+        - Reschedule Button
+        - Cancel Button
 - Schedule Appointment Process
     - First will display Service Options and a next button
     - Then the next page will display a drop-down list of their vehicles to choose which vehicle is the service being performed on.
@@ -56,6 +79,14 @@
 - Confirmation page
     - Display all info about appointment
     - Will have a home and appointments redirecting buttons
+
+- Footer
+    - link list for 
+        - contact us
+        - review us on google
+    - social media links
+    - copyright disclaimer
+    - Info about developer
 
 ***
 
