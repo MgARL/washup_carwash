@@ -34,7 +34,6 @@ export const handleSubmit = async (
   if (response.status === 204) {
     setSaved(true)
     setTimeout(()=> setSaved(false), 4000)
-    console.log("saved also add loading and saved message");
   } else {
     navigate("/login");
   }

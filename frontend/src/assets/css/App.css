@@ -20,3 +20,14 @@
 .thick-line {
   border: 2px solid black;
 }
+.edit{
+  color: rgb(235, 100, 4);
+}
+.delete{
+  color: red;
+}
+
+.clickable-icons:hover{
+  cursor: pointer;
+  color: rgb(64, 255, 0);
+}
