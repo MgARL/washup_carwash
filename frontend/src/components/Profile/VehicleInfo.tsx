@@ -67,7 +67,7 @@ function VehicleInfo() {
               <Row className="d-flex justify-content-center align-items-center">
                 <Col xs={12} sm={5}>
                   <RiEditLine
-                    onClick={() => navigate(`/vehicle/${vehicle.vehicle_id}`)}
+                    onClick={() => navigate(`/vehicle/edit/${vehicle.vehicle_id}`)}
                     size={"2em"}
                     className="clickable-icons edit"
                   />

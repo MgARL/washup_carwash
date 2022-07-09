@@ -21,12 +21,14 @@ function Dashboard() {
           },
         }
       );
-      if (response.status === 200) {
-        const data = await response.json();
-        return setUpcomingApps(data.allAppointments);
-      }
-      if (response.status === 404) {
+      const data = await response.json();
+      console.log(data)
+
+      if (response.status === 404 || data.allAppointments.length <= 0) {
         return setNoDataFound(true);
+      }
+      if (response.status === 200) {
+        return setUpcomingApps(data.allAppointments);
       }
       navigate('/login');
     };
