@@ -1,5 +1,5 @@
 section {
-    min-height: 50vh;
+    min-height: 75vh;
 }
 .link {
     text-decoration: none;
@@ -14,7 +14,20 @@ section {
 #home-info {
     width: 30%;
 }
+#home-filler{
+    height: 15%;
+}
+#home-filler-2{
+    height: 20%;
+}
+.font-size-1{
+    font-size: 1.3em;
+}
 
 .bg2 {
     background-color: #f5f5f5;
+}
+
+.card-min-height{
+    min-height: 50vh;
 }

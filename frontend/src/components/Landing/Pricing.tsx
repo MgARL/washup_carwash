@@ -18,10 +18,10 @@ function Pricing() {
   const renderCards = (): any => {
     return allServices.map((service: any) => {
       return (
-        <Col key={service.service_id}>
+        <Col key={service.service_id} className="d-flex justify-content-center my-2">
           <Card style={{ width: "18rem" }} className="bg2">
             <Card.Header>{service.service_name}</Card.Header>
-            <Card.Body className="bg1">
+            <Card.Body className="bg1 card-min-height">
               {service.service_duration} Carwash Rims Cleaning Door and Jams
               Cleaning Exterior Windows Cleaning
             </Card.Body>
@@ -33,8 +33,8 @@ function Pricing() {
   };
 
   return (
-    <div>
-      <Row xs={2} md={3} lg={4} className="my-5">
+    <div id="pricing">
+      <Row xs={1} md={3} lg={4} className="my-5">
         {allServices ? renderCards() : <p>loading</p>}
       </Row>
     </div>
