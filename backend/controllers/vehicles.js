@@ -47,6 +47,7 @@ vehicles.post('/add', async (req, res) => {
 vehicles.get('/vehicle', async (req, res) => {
     try {
         const Vehicle = await vehicle.findOne({
+            attributes: ['make', 'model', 'year', 'type'],
             where: {
                 vehicle_id: req.query.vehicle_id
             }

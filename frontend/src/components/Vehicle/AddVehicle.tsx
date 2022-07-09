@@ -57,7 +57,7 @@ function AddVehicle() {
 
   const renderError = () =>{
     return(
-        <Alert variant="danger">Please Try Again something went wrong</Alert>
+        <Alert variant="danger">Please try again something went wrong</Alert>
     )
   }
 
