@@ -15,8 +15,10 @@ import Dashboard from "./components/Dashboard";
 import Footer from "./components/Footer";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login";
-import Appointments from "./components/Appointmnets";
+import Appointments from "./components/Appointments";
 import Profile from "./components/Profile/Profile";
+import AddVehicle from "./components/Vehicle/AddVehicle";
+import EditVehicle from "./components/Vehicle/EditVehicle";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -50,6 +52,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/appointments" element={<Appointments />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/vehicle/add" element={<AddVehicle />} />
+              <Route path="/vehicle/edit/:id" element={<EditVehicle/>} />
             </Routes>
           </main>
           <Footer />
