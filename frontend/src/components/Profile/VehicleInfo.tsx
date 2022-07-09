@@ -26,7 +26,7 @@ function VehicleInfo() {
         return setAllVehicles(data.allVehicles);
       }
       if (response.status === 404) {
-        setNoVehicles(true);
+       return setNoVehicles(true);
       }
       navigate("/login");
     };
