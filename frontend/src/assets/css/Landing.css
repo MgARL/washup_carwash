@@ -1,0 +1,29 @@
+section {
+    min-height: 75vh;
+}
+.link {
+    text-decoration: none;
+}
+
+#home-image {
+    width: 70%;
+    background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 51.3%), url(../images/home-bg.jpg);
+    background-size: cover;
+    mix-blend-mode: multiply;
+}
+#home-info {
+    width: 30%;
+}
+#home-filler{
+    height: 15%;
+}
+#home-filler-2{
+    height: 20%;
+}
+.font-size-1{
+    font-size: 1.3em;
+}
+
+.card-min-height{
+    min-height: 50vh;
+}

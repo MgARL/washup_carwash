@@ -9,6 +9,25 @@
   background-color: rgba(217, 217, 217, 0.8);
 }
 
+.bg2 {
+  background-color: #f5f5f5;
+}
+
+.app-rows:nth-child(odd){
+  background-color: #d9d9d9;
+}
+
 .thick-line {
   border: 2px solid black;
+}
+.edit{
+  color: rgb(235, 100, 4);
+}
+.delete{
+  color: red;
+}
+
+.clickable-icons:hover{
+  cursor: pointer;
+  color: rgb(64, 255, 0);
 }
