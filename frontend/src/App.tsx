@@ -10,7 +10,7 @@ import { GlobalContext } from "./contexts/GlobalContext";
 
 //Components
 import Navigation from "./components/Navigation/Navigation";
-import Landing from "./components/Landing";
+import Landing from "./components/Landing/Landing";
 import Dashboard from "./components/Dashboard";
 import Footer from "./components/Footer";
 import Signup from "./components/Signup/Signup";
