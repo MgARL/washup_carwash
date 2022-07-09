@@ -58,6 +58,7 @@ appointments.post('/create', async (req, res) => {
     const { user_id, service_ids, vehicle_ids, ...rest } = req.body
     try {
         const Appointment = await appointment.create({
+            user_id,
             ...rest
         })
         if (Appointment) {
