@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Alert from 'react-bootstrap/Alert'
 
 // interfaces
 import { LoginInputs } from "../interfaces_types/interfaces";
@@ -16,12 +17,14 @@ import { GlobalContext } from "../contexts/GlobalContext";
 
 function Login() {
   const navigate = useNavigate();
+
   const { setLoggedIn } = useContext(GlobalContext);
   const initialInputs: LoginInputs = {
     email: "",
     password: "",
   };
   const [formInputs, setFormInputs] = useState<LoginInputs>(initialInputs);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormInputs(
@@ -45,14 +48,17 @@ function Login() {
       setLoggedIn?.(true);
       navigate("/");
     }
+
+    setErrorMessage(true);
+    setTimeout(() => setErrorMessage(false), 3000);
     setFormInputs(initialInputs);
   };
 
   return (
-    <Container className="my-5 bg1">
+    <Container className="my-5 pt-3 bg1">
       <Row className="d-flex justify-content-center">
         <Col xs={10}>
-          <h1>Signup</h1>
+          <h1>Login</h1>
           <hr className="thick-line" />
         </Col>
       </Row>
@@ -65,6 +71,7 @@ function Login() {
         <Form.Group controlId="login">
           <Row className="d-flex justify-content-center mb-2">
             <Col xs={12} md={10}>
+          {errorMessage && <Alert variant='danger'> Wrong Credentials Please Try Again</Alert>}
               <FloatingLabel controlId="email" label="Email:">
                 <Form.Control
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>

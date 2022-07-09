@@ -7,6 +7,12 @@ const jwt = require('jsonwebtoken')
 
 const { user } = db
 
+users.get('/', userAuthorization,(req, res) => {
+    res.status(200).json({
+        message: 'User Authorized'
+    })
+})
+
 users.post('/signup', async (req, res) => {
     const { password, role, ...rest } = req.body
     try {

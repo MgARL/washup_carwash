@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./assets/css/App.css";
 
 //Importing Dependencies
@@ -18,6 +18,21 @@ import Login from "./components/Login";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    const verifyLoggedIn = async () => {
+      const response = await fetch('http://localhost:3001/users/', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      if(response.status === 200){
+        return setLoggedIn(true)
+      }
+    }
+    verifyLoggedIn()
+  }, [])
+
   return (
     <div className="App">
       <Router>
