@@ -1,9 +1,44 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function Pricing() {
+  const [allServices, setAllServices] = useState<any>(null);
+
+  useEffect(() => {
+    const getServices = async () => {
+      const response = await fetch("http://localhost:3001/services/all");
+      const data = await response.json();
+      setAllServices(data.allServices);
+    };
+    getServices();
+  }, []);
+
+  const renderCards = (): any => {
+    return allServices.map((service: any) => {
+      return (
+        <Col key={service.service_id}>
+          <Card style={{ width: "18rem" }} className="bg2">
+            <Card.Header>{service.service_name}</Card.Header>
+            <Card.Body className="bg1">
+              {service.service_duration} Carwash Rims Cleaning Door and Jams
+              Cleaning Exterior Windows Cleaning
+            </Card.Body>
+            <Card.Footer>{service.service_price}</Card.Footer>
+          </Card>
+        </Col>
+      );
+    });
+  };
+
   return (
-    <div>Pricing</div>
-  )
+    <div>
+      <Row xs={2} md={3} lg={4} className="my-5">
+        {allServices ? renderCards() : <p>loading</p>}
+      </Row>
+    </div>
+  );
 }
 
-export default Pricing
+export default Pricing;
