@@ -15,25 +15,25 @@ import Dashboard from "./components/Dashboard";
 import Footer from "./components/Footer";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login";
-import Appointments from "./components/Appointments";
-import Profile from "./components/Profile";
+import Appointments from "./components/Appointmnets";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {
     const verifyLoggedIn = async () => {
-      const response = await fetch('http://localhost:3001/users/', {
+      const response = await fetch("http://localhost:3001/users/authorize", {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      })
-      if(response.status === 200){
-        return setLoggedIn(true)
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (response.status === 200) {
+        return setLoggedIn(true);
       }
-    }
-    verifyLoggedIn()
-  }, [])
+    };
+    verifyLoggedIn();
+  }, []);
 
   return (
     <div className="App">
@@ -47,9 +47,9 @@ function App() {
                 element={loggedIn ? <Dashboard /> : <Landing />}
               />
               <Route path="/signup" element={<Signup />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/appointments' element={<Appointments/>}/>
-              <Route path='/profile'  element={<Profile/>}/>
+              <Route path="/login" element={<Login />} />
+              <Route path="/appointments" element={<Appointments />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </main>
           <Footer />

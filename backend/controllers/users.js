@@ -7,10 +7,29 @@ const jwt = require('jsonwebtoken')
 
 const { user } = db
 
-users.get('/', userAuthorization,(req, res) => {
+users.get('/authorize', userAuthorization,(req, res) => {
     res.status(200).json({
         message: 'User Authorized'
     })
+})
+
+users.get('/user-info', userAuthorization, async (req, res) => {
+    try {
+        const User = await user.findOne({
+            attributes: ['name', 'address', 'city', 'state', 'country'],
+            where: {
+                user_id: req.body.user_id
+            }
+        })
+        res.status(200).json({
+            User
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'something went wrong please try again'
+    })
+    }
 })
 
 users.post('/signup', async (req, res) => {
@@ -20,7 +39,6 @@ users.post('/signup', async (req, res) => {
             ...rest,
             password: await bcrypt.hash(password,12)
         })
-        console.log(User)
          res.status(201).json({
             message: 'user created'
          })

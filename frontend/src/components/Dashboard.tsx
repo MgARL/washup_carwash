@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Spinner from 'react-bootstrap/Spinner'
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -76,7 +77,7 @@ function Dashboard() {
         </Col>
       </Row>
       <Container className="px-5 mt-3">
-        {upcomingApps ? renderUpcomingApps() : noDataFound ? <p>No Data Found </p> : <p>Loading</p>}
+        {upcomingApps ? renderUpcomingApps() : noDataFound ? <p>No Data Found </p> : <Spinner animation="grow" variant="primary" />}
         <Row className="d-flex justify-content-between">
           <Col xs={12} md={5} className="my-5 py-3 bg1">
             <h4>Schedule new appointment</h4>
