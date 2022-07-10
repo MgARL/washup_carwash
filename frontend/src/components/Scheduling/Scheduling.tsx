@@ -5,8 +5,9 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import ServiceOptions from "./ServiceOptions";
-import VehicleOptions from "./VehicleOptions";
+
+import ServicesCards from "../Services/ServicesCards";
+import VehiclesCards from "../Vehicle/VehiclesCards";
 import DateTimeOptions from "./DateTimeOptions";
 import PaymentOptions from "./PaymentOptions";
 import Confirmation from "./Confirmation";
@@ -17,9 +18,9 @@ function Scheduling({ title, content, next }: SchedulingParams) {
   const renderContent = () => {
     switch (content) {
       case "service":
-        return <ServiceOptions />;
+        return <ServicesCards currentServices={[]} type="option" />;
       case "vehicle":
-        return <VehicleOptions />;
+        return <VehiclesCards currentVehicles={[]} type="option" />;
       case "date-time":
         return <DateTimeOptions />;
       case "payment":
@@ -39,7 +40,7 @@ function Scheduling({ title, content, next }: SchedulingParams) {
         </Col>
       </Row>
       <Row>{renderContent()}</Row>
-      <Row className="d-flex justify-content-between">
+      <Row className="d-flex justify-content-between mt-4">
         <Col xs={12} sm={3}>
           <Button
             variant="secondary"
