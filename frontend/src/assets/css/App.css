@@ -17,6 +17,12 @@
   background-color: #d9d9d9;
 }
 
+.app-rows-select:hover {
+  border: 1px green solid;
+  background-color: rgba(5, 236, 5, 0.314);
+  cursor: pointer;
+}
+
 .thick-line {
   border: 2px solid black;
 }

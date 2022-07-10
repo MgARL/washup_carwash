@@ -35,6 +35,13 @@ function VehicleInfo() {
     getAllVehicles();
   }, [reRender]);
 
+  const toggleReRender = () => {
+    if (reRender) {
+      return setReRender(false);
+    }
+    setReRender(true);
+  };
+
   const handleDelete = async (id: string) => {
     const response: Response = await fetch(
       `${REACT_APP_API_URL}vehicles/delete`,
@@ -50,7 +57,7 @@ function VehicleInfo() {
       }
     );
     if (response.status === 204) {
-      setReRender(true);
+      toggleReRender();
     }
   };
 

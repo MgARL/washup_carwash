@@ -1,6 +1,7 @@
 const appointments = require('express').Router()
 const e = require('express')
 const db = require('../models')
+const { Op } = require("sequelize");
 
 const { appointment, vehicle_appointment, service_appointment, service, vehicle } = db
 
@@ -10,7 +11,8 @@ appointments.get('/user-all', async (req, res) => {
             where: {
                 user_id: req.body.user_id
             },
-            include: [service, vehicle]
+            include: [service, vehicle],
+            order: [['date', 'ASC']]
         })
         if (allAppointments){
             console.log('sent')
@@ -22,6 +24,39 @@ appointments.get('/user-all', async (req, res) => {
             message: 'No Appointments Found'
         })
         
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'something went wrong please try again'
+        })
+    }
+})
+
+appointments.get('/user-upcoming', async (req, res) =>{
+    try {
+        const upcomingAppointments = await appointment.findAll({
+            where: {
+                user_id: req.body.user_id,
+                [Op.and]: [
+                    {
+                        date: {
+                            [Op.gte]: new Date()
+                        }
+                    }
+                ]
+            },
+            include: [service, vehicle],
+            order: [['date', 'ASC']]
+        })
+        if (upcomingAppointments){
+            console.log('sent')
+            return res.status(200).json({
+                upcomingAppointments
+            })
+        }
+        res.status(404).json({
+            message: 'No Appointments Found'
+        })
     } catch (error) {
         console.log(error)
         res.status(500).json({
