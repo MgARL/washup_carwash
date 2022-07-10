@@ -22,7 +22,7 @@ function Home() {
         <Row id="home-filler-2"></Row>
         <Row className="mt-5 d-flex justify-content-center">
           <Col xs={12} md={8}>
-            <Button variant="success"> <Link to='/signup' className="link-light font-size-1">Schedule Service</Link></Button>
+            <Button variant="success"> <Link to='/signup' className="link-light font-size-1 text-decoration-none">Schedule Service</Link></Button>
           </Col>
         </Row>
       </section>

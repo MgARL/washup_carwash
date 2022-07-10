@@ -8,7 +8,7 @@ function Pricing() {
 
   useEffect(() => {
     const getServices = async () => {
-      const response = await fetch("http://localhost:3001/services/all");
+      const response = await fetch(`${process.env.REACT_APP_API_URL}services/all`);
       const data = await response.json();
       setAllServices(data.allServices);
     };
@@ -22,10 +22,10 @@ function Pricing() {
           <Card style={{ width: "18rem" }} className="bg2">
             <Card.Header>{service.service_name}</Card.Header>
             <Card.Body className="bg1 card-min-height">
-              {service.service_duration} Carwash Rims Cleaning Door and Jams
+              Carwash Rims Cleaning Door and Jams
               Cleaning Exterior Windows Cleaning
             </Card.Body>
-            <Card.Footer>{service.service_price}</Card.Footer>
+            <Card.Footer> starting at ${service.service_price}</Card.Footer>
           </Card>
         </Col>
       );
@@ -34,7 +34,7 @@ function Pricing() {
 
   return (
     <div id="pricing">
-      <Row xs={1} md={3} lg={4} className="my-5">
+      <Row xs={1} md={3} lg={4} className="my-5 d-flex justify-content-center">
         {allServices ? renderCards() : <p>loading</p>}
       </Row>
     </div>

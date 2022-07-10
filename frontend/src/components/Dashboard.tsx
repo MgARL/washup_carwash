@@ -14,7 +14,7 @@ function Dashboard() {
   useEffect(() => {
     const getAppointments = async () => {
       const response = await fetch(
-        "http://localhost:3001/appointments/user-all",
+        `${process.env.REACT_APP_API_URL}appointments/user-all`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -8,6 +8,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { RiDeleteBin6Line, RiEditLine } from "react-icons/ri";
 
+const { REACT_APP_API_URL } = process.env;
+
 function VehicleInfo() {
   const navigate = useNavigate();
   const [allVehicles, setAllVehicles] = useState<any>(null);
@@ -16,7 +18,7 @@ function VehicleInfo() {
 
   useEffect(() => {
     const getAllVehicles = async () => {
-      const response = await fetch("http://localhost:3001/vehicles/all", {
+      const response = await fetch(`${REACT_APP_API_URL}vehicles/all`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -26,7 +28,7 @@ function VehicleInfo() {
         return setAllVehicles(data.allVehicles);
       }
       if (response.status === 404) {
-       return setNoVehicles(true);
+        return setNoVehicles(true);
       }
       navigate("/login");
     };
@@ -35,7 +37,7 @@ function VehicleInfo() {
 
   const handleDelete = async (id: string) => {
     const response: Response = await fetch(
-      "http://localhost:3001/vehicles/delete",
+      `${REACT_APP_API_URL}vehicles/delete`,
       {
         method: "DELETE",
         headers: {
@@ -67,7 +69,9 @@ function VehicleInfo() {
               <Row className="d-flex justify-content-center align-items-center">
                 <Col xs={12} sm={5}>
                   <RiEditLine
-                    onClick={() => navigate(`/vehicle/edit/${vehicle.vehicle_id}`)}
+                    onClick={() =>
+                      navigate(`/vehicle/edit/${vehicle.vehicle_id}`)
+                    }
                     size={"2em"}
                     className="clickable-icons edit"
                   />

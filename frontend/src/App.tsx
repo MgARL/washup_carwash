@@ -20,12 +20,14 @@ import Profile from "./components/Profile/Profile";
 import AddVehicle from "./components/Vehicle/AddVehicle";
 import EditVehicle from "./components/Vehicle/EditVehicle";
 
+const { REACT_APP_API_URL } = process.env
+
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   useEffect(() => {
     const verifyLoggedIn = async () => {
-      const response = await fetch("http://localhost:3001/users/authorize", {
+      const response = await fetch(`${REACT_APP_API_URL}users/authorize`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

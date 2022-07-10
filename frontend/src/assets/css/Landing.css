@@ -7,7 +7,7 @@ section {
 
 #home-image {
     width: 70%;
-    background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 51.3%), url(../images/home-bg.jpg);
+    background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 50%), url(../images/home-bg.jpg);
     background-size: cover;
     mix-blend-mode: multiply;
 }

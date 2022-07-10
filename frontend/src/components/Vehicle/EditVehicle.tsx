@@ -10,6 +10,8 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
 
+const { REACT_APP_API_URL } = process.env
+
 function EditVehicle() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -27,7 +29,7 @@ function EditVehicle() {
     const getVehicleInfo = async () => {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:3001/vehicles/vehicle?vehicle_id=${id}`,
+        `${REACT_APP_API_URL}vehicles/vehicle?vehicle_id=${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -61,7 +63,7 @@ function EditVehicle() {
     e.preventDefault();
 
     setLoading(true);
-    const response = await fetch("http://localhost:3001/vehicles/update", {
+    const response = await fetch(`${REACT_APP_API_URL}vehicles/update`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
