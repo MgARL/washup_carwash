@@ -67,7 +67,7 @@ function VehiclesCards({currentVehicles}: any) {
     return allVehicles.map((vehicle: any) => {
       return (
         <Col key={vehicle.vehicle_id}>
-          <Card>
+          <Card >
             <Card.Body id={vehicle.vehicle_id}>
               <Card.Title className="mb-3">{vehicle.model}</Card.Title>
               <Card.Text>Make: {vehicle.make}</Card.Text>
@@ -103,7 +103,7 @@ function VehiclesCards({currentVehicles}: any) {
   };
 
   return (
-    <Row xs={1} sm={2} md={3} lg={4}>
+    <Row xs={1} sm={2} md={3} lg={4} className='d-flex justify-content-center'>
       {allVehicles ? (
         renderVehicles()
       ) : noVehicles ? (
