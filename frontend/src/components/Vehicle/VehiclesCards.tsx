@@ -5,35 +5,37 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Spinner from "react-bootstrap/Spinner";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import { RiDeleteBin6Line, RiEditLine } from "react-icons/ri";
 
 const { REACT_APP_API_URL } = process.env;
 
-function VehicleInfo() {
+function VehiclesCards({currentVehicles}: any) {
   const navigate = useNavigate();
-  const [allVehicles, setAllVehicles] = useState<any>(null);
+  const [allVehicles, setAllVehicles] = useState<any>(currentVehicles);
   const [noVehicles, setNoVehicles] = useState<boolean>(false);
   const [reRender, setReRender] = useState<boolean>(false);
 
   useEffect(() => {
-    const getAllVehicles = async () => {
-      const response = await fetch(`${REACT_APP_API_URL}vehicles/all`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      if (response.status === 200) {
-        const data = await response.json();
-        return setAllVehicles(data.allVehicles);
-      }
-      if (response.status === 404) {
-        return setNoVehicles(true);
-      }
-      navigate("/login");
-    };
-    getAllVehicles();
+    if(currentVehicles.length <= 0){
+      getAllVehicles();
+    }
   }, [reRender]);
+
+  const getAllVehicles = async () => {
+    const response = await fetch(`${REACT_APP_API_URL}vehicles/all`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      return setAllVehicles(data.allVehicles);
+    }
+    if (response.status === 404) {
+      return setNoVehicles(true);
+    }
+    navigate("/login");
+  };
 
   const toggleReRender = () => {
     if (reRender) {
@@ -72,6 +74,7 @@ function VehicleInfo() {
               <Card.Text>Year: {vehicle.year}</Card.Text>
               <Card.Text>Type: {vehicle.type}</Card.Text>
             </Card.Body>
+            { currentVehicles.length <= 0 ? (
             <Card.Footer>
               <Row className="d-flex justify-content-center align-items-center">
                 <Col xs={12} sm={5}>
@@ -92,6 +95,7 @@ function VehicleInfo() {
                 </Col>
               </Row>
             </Card.Footer>
+            ) : null }
           </Card>
         </Col>
       );
@@ -99,33 +103,16 @@ function VehicleInfo() {
   };
 
   return (
-    <Row className="vehicle-info mx-5 px-5">
-      <Col xs={12}>
-        <Row className="">
-          <Col xs={12} className="text-start">
-            <h5>Vehicle Info</h5>
-          </Col>
-        </Row>
-        <Row xs={1} sm={2} md={3} lg={4}>
-          {allVehicles ? (
-            renderVehicles()
-          ) : noVehicles ? (
-            <p>No vehicles found</p>
-          ) : (
-            <Spinner animation="grow" variant="primary" />
-          )}
-        </Row>
-        <Row className="my-5 d-flex justify-content-center">
-          <Col xs={12} md={6}>
-            <Button variant="primary" onClick={() => navigate("/vehicle/add")}>
-              {" "}
-              Add Vehicle
-            </Button>
-          </Col>
-        </Row>
-      </Col>
+    <Row xs={1} sm={2} md={3} lg={4}>
+      {allVehicles ? (
+        renderVehicles()
+      ) : noVehicles ? (
+        <p>No vehicles found</p>
+      ) : (
+        <Spinner animation="grow" variant="primary" />
+      )}
     </Row>
   );
 }
 
-export default VehicleInfo;
+export default VehiclesCards;

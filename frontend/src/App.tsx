@@ -15,10 +15,11 @@ import Dashboard from "./components/Dashboard";
 import Footer from "./components/Footer";
 import Signup from "./components/Signup/Signup";
 import Login from "./components/Login";
-import Appointments from "./components/Appointments";
+import Appointments from "./components/Appointments/Appointments";
 import Profile from "./components/Profile/Profile";
 import AddVehicle from "./components/Vehicle/AddVehicle";
 import EditVehicle from "./components/Vehicle/EditVehicle";
+import AppointmentDetails from "./components/Appointments/AppointmentDetails";
 
 const { REACT_APP_API_URL } = process.env
 
@@ -56,6 +57,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/vehicle/add" element={<AddVehicle />} />
               <Route path="/vehicle/edit/:id" element={<EditVehicle/>} />
+              <Route path="/appointments/:id" element={<AppointmentDetails />} />
             </Routes>
           </main>
           <Footer />

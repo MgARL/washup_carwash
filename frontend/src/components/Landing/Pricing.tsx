@@ -21,7 +21,7 @@ function Pricing() {
         <Col key={service.service_id} className="d-flex justify-content-center my-2">
           <Card style={{ width: "18rem" }} className="bg2">
             <Card.Header>{service.service_name}</Card.Header>
-            <Card.Body className="bg1 card-min-height">
+            <Card.Body className="bg1 card-min-height d-flex align-items-center">
               Carwash Rims Cleaning Door and Jams
               Cleaning Exterior Windows Cleaning
             </Card.Body>

@@ -78,7 +78,7 @@ function Appointments() {
           {upcomingApps.map((appointment: any) => {
             const { services, vehicles } = appointment;
             return (
-              <Row key={appointment.appointment_id} onClick={()=> navigate(`appointments/${appointment.appointment_id}`)} className="app-rows app-rows-select">
+              <Row key={appointment.appointment_id} onClick={()=> navigate(`/appointments/${appointment.appointment_id}`)} className="app-rows app-rows-select">
                 <Col xs={3}>{appointment.date}</Col>
                 <Col xs={3}>{appointment.time}</Col>
                 <Col xs={3}>
