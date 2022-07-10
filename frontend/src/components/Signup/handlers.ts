@@ -19,7 +19,7 @@ export const handleSubmit = async (
   navigate: NavigateFunction
 ) => {
   e.preventDefault();
-  const response = await fetch("http://localhost:3001/users/signup", {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}users/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formInputs),

@@ -7,14 +7,15 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
-function Dashboard() {
+function Appointments() {
   const navigate = useNavigate();
   const [upcomingApps, setUpcomingApps] = useState<any>(null);
   const [noDataFound, setNoDataFound] = useState<boolean>(false);
+  const [reRender, setReRender] = useState<boolean>(false);
   useEffect(() => {
     const getAppointments = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}appointments/user-upcoming`,
+        `${process.env.REACT_APP_API_URL}appointments/user-all`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -23,18 +24,25 @@ function Dashboard() {
       );
       const data = await response.json();
 
-      if (response.status === 404 || data.upcomingAppointments.length <= 0) {
+      if (response.status === 404 || data.allAppointments.length <= 0) {
         return setNoDataFound(true);
       }
       if (response.status === 200) {
-        return setUpcomingApps(data.upcomingAppointments);
+        return setUpcomingApps(data.allAppointments);
       }
       navigate("/login");
     };
     getAppointments();
-  }, []);
+  }, [reRender]);
 
-  const renderUpcomingApps = () => {
+  const toggleReRender = () => {
+    if (reRender) {
+      return setReRender(false);
+    }
+    setReRender(true);
+  };
+
+  const renderAppointments = () => {
     return (
       <Row>
         {/*Its Own function here */}
@@ -50,18 +58,14 @@ function Dashboard() {
           {upcomingApps.map((appointment: any) => {
             const { services, vehicles } = appointment;
             return (
-              <Row key={appointment.appointment_id} className="app-rows">
+              <Row key={appointment.appointment_id} onClick={()=> navigate(`/appointments/${appointment.appointment_id}`)} className="app-rows app-rows-select">
                 <Col xs={3}>{appointment.date}</Col>
                 <Col xs={3}>{appointment.time}</Col>
                 <Col xs={3}>
-                  {services.map((service: any) => {
-                    return `${service.service_name} `;
-                  })}
+                { services.length >= 2 ? `${services[0].service_name} ... more` : services[0].service_name}
                 </Col>
                 <Col xs={3}>
-                  {vehicles.map((vehicle: any) => {
-                    return `${vehicle.make} ${vehicle.model} `;
-                  })}
+                { vehicles.length >= 2 ? `${vehicles[0].make} ${vehicles[0].model} ... more` : `${vehicles[0].make} ${vehicles[0].model}`}
                 </Col>
               </Row>
             );
@@ -70,6 +74,7 @@ function Dashboard() {
       </Row>
     );
   };
+
   return (
     <Container className="bg2">
       <Row>
@@ -79,29 +84,17 @@ function Dashboard() {
       </Row>
       <Container className="px-5 mt-3">
         {upcomingApps ? (
-          renderUpcomingApps()
+          renderAppointments()
         ) : noDataFound ? (
           <p>No Data Found </p>
         ) : (
           <Spinner animation="grow" variant="primary" />
         )}
-        <Row className="d-flex justify-content-between">
+        <Row className="d-flex justify-content-center">
           <Col xs={12} md={5} className="my-5 py-3 bg1">
             <h4>Schedule new appointment</h4>
             <Button variant="success" className="mt-2">
-              {" "}
-              Schedule Now{" "}
-            </Button>
-          </Col>
-          <Col xs={12} md={5} className="my-5 py-3 bg1">
-            <h4>Check all your appointments</h4>
-            <Button
-              variant="primary"
-              className="mt-2"
-              onClick={() => navigate("/appointments")}
-            >
-              {" "}
-              Appointments{" "}
+              Schedule Now
             </Button>
           </Col>
         </Row>
@@ -110,4 +103,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Appointments;

@@ -38,7 +38,7 @@ function AddVehicle() {
     e.preventDefault();
 
     setLoading(true);
-    const response = await fetch("http://localhost:3001/vehicles/add", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}vehicles/add`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

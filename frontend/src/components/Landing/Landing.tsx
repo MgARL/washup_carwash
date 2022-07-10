@@ -1,20 +1,21 @@
-import React from 'react'
+import React from "react";
 import Container from "react-bootstrap/Container";
-import '../../assets/css/Landing.css'
+import "../../assets/css/Landing.css";
 
-import Home from './Home';
-import Pricing from './Pricing';
-import AboutUs from './AboutUs';
-
+import Home from "./Home";
+import ServicesCards from "../Services/ServicesCards"
+import AboutUs from "./AboutUs";
 
 function Landing() {
   return (
     <Container>
       <Home />
-      <Pricing />
+      <div id="pricing">
+        <ServicesCards currentServices={[]} />
+      </div>
       <AboutUs />
     </Container>
-  )
+  );
 }
 
-export default Landing
+export default Landing;

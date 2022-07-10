@@ -22,7 +22,7 @@ export const handleSubmit = async (
 ) => {
   e.preventDefault();
   setLoading(true);
-  const response = await fetch("http://localhost:3001/users/update", {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}users/update`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,

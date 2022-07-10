@@ -20,7 +20,7 @@ function BasicInfo() {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      const response = await fetch("http://localhost:3001/users/user-info", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}users/user-info`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
