@@ -20,3 +20,9 @@ export interface UserInfo {
   state: string;
   country: string;
 }
+
+export interface SchedulingParams {
+  title: string;
+  content: string;
+  next: string;
+}

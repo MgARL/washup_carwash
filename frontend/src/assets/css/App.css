@@ -23,6 +23,12 @@
   cursor: pointer;
 }
 
+.card-select:hover{
+  border: 1px rgb(10, 173, 10) solid;
+  cursor: pointer;
+}
+
+
 .thick-line {
   border: 2px solid black;
 }
