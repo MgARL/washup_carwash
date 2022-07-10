@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import AppointmentsTable from "./Appointments/AppointmentsTable";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -34,42 +35,7 @@ function Dashboard() {
     getAppointments();
   }, []);
 
-  const renderUpcomingApps = () => {
-    return (
-      <Row>
-        {/*Its Own function here */}
-        <Col xs={12}>
-          <Row>
-            <Col xs={3}>Date</Col>
-            <Col xs={3}>Time</Col>
-            <Col xs={3}>Services</Col>
-            <Col xs={3}>Vehicles</Col>
-          </Row>
-          <hr />
-          {/* Map will go here */}
-          {upcomingApps.map((appointment: any) => {
-            const { services, vehicles } = appointment;
-            return (
-              <Row key={appointment.appointment_id} className="app-rows">
-                <Col xs={3}>{appointment.date}</Col>
-                <Col xs={3}>{appointment.time}</Col>
-                <Col xs={3}>
-                  {services.map((service: any) => {
-                    return `${service.service_name} `;
-                  })}
-                </Col>
-                <Col xs={3}>
-                  {vehicles.map((vehicle: any) => {
-                    return `${vehicle.make} ${vehicle.model} `;
-                  })}
-                </Col>
-              </Row>
-            );
-          })}
-        </Col>
-      </Row>
-    );
-  };
+  
   return (
     <Container className="bg2">
       <Row>
@@ -79,7 +45,7 @@ function Dashboard() {
       </Row>
       <Container className="px-5 mt-3">
         {upcomingApps ? (
-          renderUpcomingApps()
+          <AppointmentsTable appointments={upcomingApps}/>
         ) : noDataFound ? (
           <p>No Data Found </p>
         ) : (
@@ -88,7 +54,7 @@ function Dashboard() {
         <Row className="d-flex justify-content-between">
           <Col xs={12} md={5} className="my-5 py-3 bg1">
             <h4>Schedule new appointment</h4>
-            <Button variant="success" className="mt-2">
+            <Button onClick={() => navigate("/scheduling/service")} variant="success" className="mt-2">
               {" "}
               Schedule Now{" "}
             </Button>

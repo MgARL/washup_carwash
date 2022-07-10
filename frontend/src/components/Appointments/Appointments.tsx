@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import AppointmentsTable from "./AppointmentsTable";
 
 function Appointments() {
   const navigate = useNavigate();
@@ -45,7 +46,6 @@ function Appointments() {
   const renderAppointments = () => {
     return (
       <Row>
-        {/*Its Own function here */}
         <Col xs={12}>
           <Row>
             <Col xs={3}>Date</Col>
@@ -54,7 +54,6 @@ function Appointments() {
             <Col xs={3}>Vehicles</Col>
           </Row>
           <hr />
-          {/* Map will go here */}
           {upcomingApps.map((appointment: any) => {
             const { services, vehicles } = appointment;
             return (
@@ -79,12 +78,12 @@ function Appointments() {
     <Container className="bg2">
       <Row>
         <Col xs={12} className="text-start">
-          <h2>Upcoming Appointments</h2>
+          <h2>All Appointments</h2>
         </Col>
       </Row>
       <Container className="px-5 mt-3">
         {upcomingApps ? (
-          renderAppointments()
+          <AppointmentsTable appointments={upcomingApps}/>
         ) : noDataFound ? (
           <p>No Data Found </p>
         ) : (
@@ -93,7 +92,7 @@ function Appointments() {
         <Row className="d-flex justify-content-center">
           <Col xs={12} md={5} className="my-5 py-3 bg1">
             <h4>Schedule new appointment</h4>
-            <Button variant="success" className="mt-2">
+            <Button onClick={() => navigate("/scheduling/service")} variant="success" className="mt-2">
               Schedule Now
             </Button>
           </Col>
