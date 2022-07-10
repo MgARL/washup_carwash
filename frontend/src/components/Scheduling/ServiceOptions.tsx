@@ -1,12 +1,11 @@
-
-import ServicesCards from '../Services/ServicesCards'
+import ServicesCards from "../Services/ServicesCards";
 
 function ServiceOptions() {
   return (
-    <section >
+    <section>
       <ServicesCards currentServices={[]} type="option" />
     </section>
-  )
+  );
 }
 
-export default ServiceOptions
+export default ServiceOptions;

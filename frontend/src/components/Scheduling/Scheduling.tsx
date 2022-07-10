@@ -19,7 +19,7 @@ function Scheduling({ title, content, next }: SchedulingParams) {
       case "service":
         return <ServiceOptions />;
       case "vehicle":
-        return <VehicleOptions/>;
+        return <VehicleOptions />;
       case "date-time":
         return <DateTimeOptions />;
       case "payment":
@@ -33,7 +33,9 @@ function Scheduling({ title, content, next }: SchedulingParams) {
     <Container className="bg2 py-5">
       <Row className="text-start">
         <Col xs={12}>
-          <h2>{title !== 'Confirmation' && 'Choose'} {title}:</h2>
+          <h2>
+            {title !== "Confirmation" && "Choose"} {title}:
+          </h2>
         </Col>
       </Row>
       <Row>{renderContent()}</Row>

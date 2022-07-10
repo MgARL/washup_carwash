@@ -48,7 +48,19 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <GlobalContext.Provider value={{ setLoggedIn, selectedServices, setSelectedServices, selectedVehicles, setSelectedVehicles, date, setDate, time, setTime }}>
+        <GlobalContext.Provider
+          value={{
+            setLoggedIn,
+            selectedServices,
+            setSelectedServices,
+            selectedVehicles,
+            setSelectedVehicles,
+            date,
+            setDate,
+            time,
+            setTime,
+          }}
+        >
           <Navigation loggedIn={loggedIn} />
           <main className="footer-fill">
             <Routes>

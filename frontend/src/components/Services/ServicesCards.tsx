@@ -30,12 +30,10 @@ function ServicesCards({ currentServices, type }: any) {
     if (!selectedServices.includes(service_id)) {
       setSelectedServices?.((prevState: any) => [...prevState, service_id]);
     } else {
-      let newArr = removeArrValue(selectedServices,service_id )
-      setSelectedServices?.(newArr)
+      let newArr = removeArrValue(selectedServices, service_id);
+      setSelectedServices?.(newArr);
     }
   };
-
-  console.log(selectedServices);
 
   const renderCards = (): any => {
     return allServices.map((service: any) => {
