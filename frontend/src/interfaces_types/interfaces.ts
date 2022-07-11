@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
-
+import { Dispatch, SetStateAction } from "react";
 
 export interface FormInputs {
   name: string;
@@ -46,4 +45,11 @@ export interface GlobalContextInterface {
   setSelectedServicesNames?: Dispatch<SetStateAction<any>>;
   selectedVehiclesNames?: any;
   setSelectedVehiclesNames?: Dispatch<SetStateAction<any>>;
+}
+
+export interface AppointmentBody {
+  date: string | undefined;
+  time: string | undefined;
+  service_ids: [string];
+  vehicle_ids: [string];
 }
