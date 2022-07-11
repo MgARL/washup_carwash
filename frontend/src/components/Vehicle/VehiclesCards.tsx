@@ -15,7 +15,12 @@ const { REACT_APP_API_URL } = process.env;
 
 function VehiclesCards({ currentVehicles, type }: any) {
   const navigate = useNavigate();
-  const { selectedVehicles, setSelectedVehicles } = useContext(GlobalContext);
+  const {
+    selectedVehicles,
+    setSelectedVehicles,
+    selectedVehiclesNames,
+    setSelectedVehiclesNames,
+  } = useContext(GlobalContext);
   const [allVehicles, setAllVehicles] = useState<any>(currentVehicles);
   const [noVehicles, setNoVehicles] = useState<boolean>(false);
   const [reRender, setReRender] = useState<boolean>(false);
@@ -68,19 +73,33 @@ function VehiclesCards({ currentVehicles, type }: any) {
     }
   };
 
-  const handleVehicleSelect = (vehicle_id: string) => {
+  const handleVehicleSelect = (
+    vehicle_id: string,
+    vehicle_make: string,
+    vehicle_model: string
+  ) => {
+    const vehicle_name = `${vehicle_make} ${vehicle_model}`;
     if (!selectedVehicles.includes(vehicle_id)) {
       setSelectedVehicles?.((prevState: any) => [...prevState, vehicle_id]);
+      setSelectedVehiclesNames?.((prevState: any) => [
+        ...prevState,
+        vehicle_name,
+      ]);
     } else {
-      let newArr = removeArrValue(selectedVehicles, vehicle_id);
+      const newArr = removeArrValue(selectedVehicles, vehicle_id);
+      const newNameArr = removeArrValue(selectedVehiclesNames, vehicle_name);
       setSelectedVehicles?.(newArr);
+      setSelectedVehiclesNames?.(newNameArr);
     }
   };
 
   const renderVehicles = () => {
     return allVehicles.map((vehicle: any) => {
       return (
-        <Col key={vehicle.vehicle_id} className="d-flex justify-content-center my-2">
+        <Col
+          key={vehicle.vehicle_id}
+          className="d-flex justify-content-center my-2"
+        >
           <Card
             style={{ width: "18rem" }}
             className={`${type === "option" && "card-select"} ${
@@ -89,7 +108,11 @@ function VehiclesCards({ currentVehicles, type }: any) {
             }`}
             onClick={() => {
               if (type === "option") {
-                handleVehicleSelect(vehicle.vehicle_id);
+                handleVehicleSelect(
+                  vehicle.vehicle_id,
+                  vehicle.make,
+                  vehicle.model
+                );
               }
             }}
           >

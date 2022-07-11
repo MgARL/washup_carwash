@@ -1,19 +1,54 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalContext";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Spinner from "react-bootstrap/Spinner";
+import Alert from "react-bootstrap/Alert";
 
 function Confirmation() {
+  const navigate = useNavigate();
   const {
     selectedServices,
     selectedServicesNames,
     selectedVehicles,
+    selectedVehiclesNames,
     servicesPrices,
     date,
     time,
   } = useContext(GlobalContext);
+  const [address, setAddress] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<boolean>(false)
+
+  useEffect(() => {
+    getAddress();
+  });
+
+  const getAddress = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}users/user-info`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.status === 200) {
+        return setAddress(data.User.address);
+      }
+      setErrorMessage(true);
+      setTimeout(()=> setErrorMessage(false) ,4000);
+      setTimeout(()=> navigate("/login"), 4000);
+    } catch (error) {
+      setErrorMessage(true);
+      setTimeout(()=> setErrorMessage(false) ,4000);
+      setTimeout(()=> navigate("/login"), 4000);
+    }
+  };
 
   const calculateTotal = () => {
     const totalPrices = servicesPrices.map((price: number): number => {
@@ -28,6 +63,11 @@ function Confirmation() {
 
   return (
     <Container className="bg2 text-start">
+      {errorMessage && (
+        <Alert variant="danger">
+          Something went wrong, you will be redirected to login shortly
+        </Alert>
+      )}
       <Row className="mx-4">
         <Col xs={12}>
           <h3>Services</h3>
@@ -48,12 +88,8 @@ function Confirmation() {
         </Col>
       </Row>
       <Row className="mx-5">
-        <Col xs={6}>
-          Payment- Stripe
-        </Col>
-        <Col xs={6}>
-          Amount: {calculateTotal()}
-        </Col>
+        <Col xs={6}>Payment- Stripe</Col>
+        <Col xs={6}>Amount: {calculateTotal()}</Col>
       </Row>
       <Row className="mx-4">
         <Col xs={12}>
@@ -62,7 +98,7 @@ function Confirmation() {
       </Row>
       <Row className="mx-5">
         <Col xs={12}>
-          {date?.toLocaleString().split(',')[0]}
+          {date?.toLocaleString().split(",")[0]} at {time?.slice(0, 5)}
         </Col>
       </Row>
       <Row className="mx-4">
@@ -72,7 +108,7 @@ function Confirmation() {
       </Row>
       <Row className="mx-5">
         <Col xs={12}>
-          Address here...
+          {address ? address : <Spinner animation="grow" variant="primary" />}
         </Col>
       </Row>
       <Row className="mx-4">
@@ -82,11 +118,14 @@ function Confirmation() {
       </Row>
       <Row className="mx-5">
         <Col xs={12}>
-          vehicles here...
+          <ul>
+            {selectedVehiclesNames.map((vehicleName: string, idx: number) => {
+              return <li key={selectedVehicles[idx]}>{vehicleName}</li>;
+            })}
+          </ul>
         </Col>
       </Row>
     </Container>
-    
   );
 }
 
