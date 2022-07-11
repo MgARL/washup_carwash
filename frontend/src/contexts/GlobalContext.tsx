@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction, createContext } from "react";
+import { createContext } from "react";
 
-interface GlobalContext{
-    setLoggedIn? : Dispatch<SetStateAction<boolean>> 
-}
+import { GlobalContextInterface } from "../interfaces_types/interfaces";
 
-export const GlobalContext = createContext<GlobalContext>({})
+export const GlobalContext = createContext<GlobalContextInterface>({
+  date: null,
+});

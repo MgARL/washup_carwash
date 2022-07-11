@@ -20,11 +20,19 @@ import Profile from "./components/Profile/Profile";
 import AddVehicle from "./components/Vehicle/AddVehicle";
 import EditVehicle from "./components/Vehicle/EditVehicle";
 import AppointmentDetails from "./components/Appointments/AppointmentDetails";
+import Scheduling from "./components/Scheduling/Scheduling";
 
-const { REACT_APP_API_URL } = process.env
+const { REACT_APP_API_URL } = process.env;
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [selectedServices, setSelectedServices] = useState<any>([]);
+  const [servicesPrices, setServicesPrices] = useState<any>([]);
+  const [selectedServicesNames, setSelectedServicesNames] = useState<any>([]);
+  const [selectedVehicles, setSelectedVehicles] = useState<any>([]);
+  const [selectedVehiclesNames, setSelectedVehiclesNames] = useState<any>([]);
+  const [date, setDate] = useState<Date | null>(null);
+  const [time, setTime] = useState<string>("08:00:00");
 
   useEffect(() => {
     const verifyLoggedIn = async () => {
@@ -43,7 +51,25 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <GlobalContext.Provider value={{ setLoggedIn }}>
+        <GlobalContext.Provider
+          value={{
+            setLoggedIn,
+            selectedServices,
+            setSelectedServices,
+            selectedVehicles,
+            setSelectedVehicles,
+            date,
+            setDate,
+            time,
+            setTime,
+            servicesPrices,
+            setServicesPrices,
+            selectedServicesNames,
+            setSelectedServicesNames,
+            selectedVehiclesNames,
+            setSelectedVehiclesNames,
+          }}
+        >
           <Navigation loggedIn={loggedIn} />
           <main className="footer-fill">
             <Routes>
@@ -56,8 +82,61 @@ function App() {
               <Route path="/appointments" element={<Appointments />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/vehicle/add" element={<AddVehicle />} />
-              <Route path="/vehicle/edit/:id" element={<EditVehicle/>} />
-              <Route path="/appointments/:id" element={<AppointmentDetails />} />
+              <Route path="/vehicle/edit/:id" element={<EditVehicle />} />
+              <Route
+                path="/appointments/:id"
+                element={<AppointmentDetails />}
+              />
+              <Route
+                path="/scheduling/service"
+                element={
+                  <Scheduling
+                    title="Services"
+                    content="service"
+                    next="vehicle"
+                  />
+                }
+              />
+              <Route
+                path="/scheduling/vehicle"
+                element={
+                  <Scheduling
+                    title="Vehicles"
+                    content="vehicle"
+                    next="date-time"
+                  />
+                }
+              />
+              <Route
+                path="/scheduling/date-time"
+                element={
+                  <Scheduling
+                    title="Date and Time"
+                    content="date-time"
+                    next="payment"
+                  />
+                }
+              />
+              <Route
+                path="/scheduling/payment"
+                element={
+                  <Scheduling
+                    title="Payment"
+                    content="payment"
+                    next="confirmation"
+                  />
+                }
+              />
+              <Route
+                path="/scheduling/confirmation"
+                element={
+                  <Scheduling
+                    title="Confirmation"
+                    content="confirmation"
+                    next="submit"
+                  />
+                }
+              />
             </Routes>
           </main>
           <Footer />
