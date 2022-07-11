@@ -41,7 +41,7 @@ function Scheduling({ title, content, next }: SchedulingParams) {
       </Row>
       <Row>{renderContent()}</Row>
       <Row className="d-flex justify-content-between mt-4">
-        <Col xs={12} sm={3}>
+        <Col xs={6} sm={3}>
           <Button
             variant="secondary"
             className="mt-2"
@@ -51,7 +51,7 @@ function Scheduling({ title, content, next }: SchedulingParams) {
             Previous
           </Button>
         </Col>
-        <Col xs={12} sm={3}>
+        <Col xs={6} sm={3}>
           {next === "submit" ? (
             <Button
               variant="primary"

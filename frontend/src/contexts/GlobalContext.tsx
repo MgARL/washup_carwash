@@ -6,8 +6,8 @@ interface GlobalContext {
   setSelectedServices?: Dispatch<SetStateAction<any>>;
   selectedVehicles?: any;
   setSelectedVehicles?: Dispatch<SetStateAction<any>>;
-  date?: string;
-  setDate?: Dispatch<SetStateAction<string>>;
+  date?: Date | null;
+  setDate?: Dispatch<SetStateAction<Date | null>>;
   time?: string;
   setTime?: Dispatch<SetStateAction<string>>;
 }

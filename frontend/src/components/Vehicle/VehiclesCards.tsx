@@ -80,8 +80,9 @@ function VehiclesCards({ currentVehicles, type }: any) {
   const renderVehicles = () => {
     return allVehicles.map((vehicle: any) => {
       return (
-        <Col key={vehicle.vehicle_id}>
+        <Col key={vehicle.vehicle_id} className="d-flex justify-content-center my-2">
           <Card
+            style={{ width: "18rem" }}
             className={`${type === "option" && "card-select"} ${
               selectedVehicles.includes(vehicle.vehicle_id) &&
               "border border-success"

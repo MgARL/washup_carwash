@@ -28,7 +28,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [selectedServices, setSelectedServices] = useState<any>([]);
   const [selectedVehicles, setSelectedVehicles] = useState<any>([]);
-  const [date, setDate] = useState<string>("");
+  const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState<string>("");
 
   useEffect(() => {
