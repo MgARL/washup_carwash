@@ -62,7 +62,7 @@ function PaymentOptions() {
         <Row className="mt-5">
           {success && (
             <Alert variant="success">
-              Payment Succeeded, Please Click Next
+              Payment Added, Please Click Next
             </Alert>
           )}
           <Col>
