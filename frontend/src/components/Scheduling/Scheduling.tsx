@@ -35,7 +35,7 @@ function Scheduling({ title, content, next }: SchedulingParams) {
       <Row className="text-start">
         <Col xs={12}>
           <h2>
-            {title !== "Confirmation" && "Choose"} {title}:
+            {(title !== "Confirmation" && title !== "Payment") && "Choose"} {title}:
           </h2>
         </Col>
       </Row>

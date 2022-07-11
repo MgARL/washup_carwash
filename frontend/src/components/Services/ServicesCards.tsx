@@ -10,7 +10,14 @@ import removeArrValue from "../../hooks/removeArrValue";
 
 function ServicesCards({ currentServices, type }: any) {
   const [allServices, setAllServices] = useState<any>(currentServices);
-  const { setSelectedServices, selectedServices } = useContext(GlobalContext);
+  const {
+    setSelectedServices,
+    selectedServices,
+    servicesPrices,
+    setServicesPrices,
+    selectedServicesNames,
+    setSelectedServicesNames
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     if (currentServices.length <= 0) {
@@ -26,12 +33,18 @@ function ServicesCards({ currentServices, type }: any) {
     setAllServices(data.allServices);
   };
 
-  const handleServiceSelect = (service_id: string) => {
+  const handleServiceSelect = (service_id: string, service_price: any, service_name: any) => {
     if (!selectedServices.includes(service_id)) {
       setSelectedServices?.((prevState: any) => [...prevState, service_id]);
+      setServicesPrices?.((prevState: any) => [...prevState, service_price]);
+      setSelectedServicesNames?.((prevState: any) => [...prevState, service_name]);
     } else {
-      let newArr = removeArrValue(selectedServices, service_id);
-      setSelectedServices?.(newArr);
+      let newServiceArr = removeArrValue(selectedServices, service_id);
+      let newPriceArr = removeArrValue(servicesPrices, service_price);
+      let newServiceNamesArr = removeArrValue(selectedServicesNames, service_name);
+      setSelectedServices?.(newServiceArr);
+      setServicesPrices?.(newPriceArr);
+      setSelectedServicesNames?.(newServiceNamesArr);
     }
   };
 
@@ -50,7 +63,7 @@ function ServicesCards({ currentServices, type }: any) {
             }`}
             onClick={() => {
               if (type === "option") {
-                handleServiceSelect(service.service_id);
+                handleServiceSelect(service.service_id, service.service_price, service.service_name);
               }
             }}
           >

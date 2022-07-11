@@ -11,8 +11,8 @@ import Form from "react-bootstrap/Form";
 import "react-datepicker/dist/react-datepicker.css";
 
 function DateTimeOptions() {
-  const { setDate, setTime, time } = useContext(GlobalContext);
-  const [startDate, setStartDate] = useState<Date | null>(null);
+  const { setDate, setTime, date, time } = useContext(GlobalContext);
+  const [startDate, setStartDate] = useState<Date | null>(date);
   const isWeekday = (myDate: Date) => {
     const day = myDate.getDay();
     return day !== 0 && day !== 6;
@@ -52,6 +52,7 @@ function DateTimeOptions() {
               onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                 setTime?.(e.target.value)
               }
+              value={time}
               required
             >
               <option value="08:00:00">8:00AM-10:00AM</option>
