@@ -103,7 +103,7 @@ function VehiclesCards({ currentVehicles, type }: any) {
           <Card
             style={{ width: "18rem" }}
             className={`${type === "option" && "card-select"} ${
-              selectedVehicles.includes(vehicle.vehicle_id) &&
+              (selectedVehicles.includes(vehicle.vehicle_id) && type === "option" ) &&
               "border border-success"
             }`}
             onClick={() => {
@@ -125,7 +125,7 @@ function VehiclesCards({ currentVehicles, type }: any) {
             {currentVehicles.length <= 0 && type !== "option" && (
               <Card.Footer>
                 <Row className="d-flex justify-content-center align-items-center">
-                  <Col xs={12} sm={5}>
+                  <Col xs={5}>
                     <RiEditLine
                       onClick={() =>
                         navigate(`/vehicle/edit/${vehicle.vehicle_id}`)
@@ -134,7 +134,7 @@ function VehiclesCards({ currentVehicles, type }: any) {
                       className="clickable-icons edit"
                     />
                   </Col>
-                  <Col xs={12} sm={5}>
+                  <Col xs={5}>
                     <RiDeleteBin6Line
                       onClick={() => handleDelete(`${vehicle.vehicle_id}`)}
                       size={"1.8em"}
@@ -156,7 +156,7 @@ function VehiclesCards({ currentVehicles, type }: any) {
   };
 
   return (
-    <Row xs={1} sm={2} md={3} lg={4} className="d-flex justify-content-center">
+    <Row xs={1} sm={2} md={3} lg={4} className='d-flex justify-content-center'>
       {allVehicles ? (
         renderVehicles()
       ) : noVehicles ? (

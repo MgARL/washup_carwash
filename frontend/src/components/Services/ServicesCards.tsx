@@ -58,7 +58,7 @@ function ServicesCards({ currentServices, type }: any) {
           <Card
             style={{ width: "18rem" }}
             className={`bg2 ${type === "option" && "card-select"} ${
-              selectedServices.includes(service.service_id) &&
+             (selectedServices.includes(service.service_id) && type === "option") &&
               "border border-success"
             }`}
             onClick={() => {
