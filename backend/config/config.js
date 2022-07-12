@@ -5,7 +5,7 @@ module.exports = {
     "username": process.env.DB_DEV_USERNAME,
     "password": process.env.DB_DEV_PASSWORD,
     "database": process.env.DB_DEV_DATABASE,
-    "host": "127.0.0.1",
+    "host": process.env.DB_DEV_HOST,
     "dialect": "postgres"
   },
   "test": {

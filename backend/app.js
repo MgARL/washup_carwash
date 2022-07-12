@@ -18,7 +18,7 @@ const adminAuthorization = require('./middleware/admin_auth')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors({
-    origin: "*" //use array for multiple sites ie. ['google.com', 'apple.com']
+    origin: process.env.FRONT_END_URL //use array for multiple sites ie. ['google.com', 'apple.com']
 }))
 
 //  controllers
