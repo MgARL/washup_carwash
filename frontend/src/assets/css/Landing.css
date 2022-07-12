@@ -4,7 +4,10 @@ section {
 .link {
     text-decoration: none;
 }
-
+.bg-image{
+    background: linear-gradient(0deg, rgba(18, 18, 18, 0.523), rgba(246, 245, 245, 0.704)), url(../images/home-bg.jpg);
+    background-size: cover;
+}
 #home-image {
     width: 70%;
     background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 50%), url(../images/home-bg.jpg);

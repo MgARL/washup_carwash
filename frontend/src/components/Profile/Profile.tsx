@@ -19,7 +19,7 @@ function Profile() {
       </Row>
       <BasicInfo />
       <hr />
-      <Row className="vehicle-info mx-5 px-5">
+      <Row className="vehicle-info">
         <Col xs={12}>
           <Row>
             <Col xs={12} className="text-start">
