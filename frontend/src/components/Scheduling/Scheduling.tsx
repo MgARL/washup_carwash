@@ -119,7 +119,7 @@ function Scheduling({ title, content, next }: SchedulingParams) {
           </h2>
         </Col>
       </Row>
-      <Row>{renderContent()}</Row>
+      <Row className="d-flex justify-content-center">{renderContent()}</Row>
       {content === "vehicle" && (
         <Row className="d-flex justify-content-center">
           <Col xs={12} md={5} className="my-5 py-3 bg1">
