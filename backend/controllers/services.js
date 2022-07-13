@@ -37,7 +37,7 @@ services.get('/get-one', async (req, res) => {
 })
 
 services.post('/add', adminAuthorization, async (req, res) => {
-    const { ...rest } = req.body
+    const {...rest } = req.body
     try {
         const Service = await service.create({
             ...rest
