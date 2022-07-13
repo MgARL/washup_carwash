@@ -35,18 +35,22 @@ function App() {
   const [time, setTime] = useState<string>("08:00:00");
 
   useEffect(() => {
-    const verifyLoggedIn = async () => {
-      const response = await fetch(`${REACT_APP_API_URL}users/authorize`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      if (response.status === 200) {
-        return setLoggedIn(true);
-      }
-    };
-    verifyLoggedIn();
+    const token = localStorage.getItem("token")
+    if(token){
+      verifyLoggedIn(token);
+    }
   }, []);
+
+  const verifyLoggedIn = async (token: string) => {
+    const response = await fetch(`${REACT_APP_API_URL}users/authorize`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.status === 200) {
+      return setLoggedIn(true);
+    }
+  };
 
   return (
     <div className="App">

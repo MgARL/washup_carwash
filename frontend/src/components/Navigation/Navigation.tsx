@@ -18,7 +18,7 @@ interface Props {
 function Navigation({ loggedIn }: Props) {
   return (
     <>
-      <Navbar variant="light" sticky="top" expand="sm" className="bg1">
+      <Navbar collapseOnSelect variant="light" sticky="top" expand="sm" className="bg1">
         <Container>
           <Navbar.Brand as={Link} to="/">
             <img
@@ -28,8 +28,8 @@ function Navigation({ loggedIn }: Props) {
               alt="Link logo"
             />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbar">
+          <Navbar.Toggle aria-controls="main-navbar" />
+          <Navbar.Collapse id="main-navbar">
             <Nav className="ms-auto">
               {loggedIn ? <LoggedInNav /> : <NotLoggedInNav />}
             </Nav>

@@ -14,10 +14,10 @@ function NotLoggedInNav() {
       <Nav.Link href="/#about-us" className="d-flex align-items-center">
         About Us
       </Nav.Link>
-      <Nav.Link as={Link} to="/signup" className="d-flex align-items-center">
+      <Nav.Link eventKey={1} as={Link} to="/signup" className="d-flex align-items-center">
         <Button variant="success">Signup</Button>
       </Nav.Link>
-      <Nav.Link as={Link} to="/login" className="d-flex align-items-center">
+      <Nav.Link eventKey={2} as={Link} to="/login" className="d-flex align-items-center">
         <Button variant="primary">
           Login
         </Button>

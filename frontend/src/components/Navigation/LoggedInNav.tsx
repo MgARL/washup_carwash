@@ -13,10 +13,10 @@ function LoggedInNav() {
   }
   return (
     <>
-      <Nav.Link as={ Link } to='/' className='d-flex align-items-center'>Dashboard</Nav.Link>
-      <Nav.Link as={ Link } to='/appointments' className='d-flex align-items-center'>Appointments</Nav.Link>
-      <Nav.Link as={ Link } to='/profile' className='d-flex align-items-center'>Profile</Nav.Link>
-      <Nav.Link as={ Link } to='/'>
+      <Nav.Link eventKey={1} as={ Link } to='/' className='d-flex align-items-center'>Dashboard</Nav.Link>
+      <Nav.Link eventKey={2} as={ Link } to='/appointments' className='d-flex align-items-center'>Appointments</Nav.Link>
+      <Nav.Link eventKey={3} as={ Link } to='/profile' className='d-flex align-items-center'>Profile</Nav.Link>
+      <Nav.Link eventKey={4} as={ Link } to='/'>
         <Button variant="danger" onClick={handleLogOut}>LogOut</Button>
       </Nav.Link>
     </>
