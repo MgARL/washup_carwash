@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
     service_duration: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    description: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false
     }
   }, {
     sequelize,

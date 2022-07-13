@@ -20,10 +20,20 @@ import Confirmation from "./Confirmation";
 
 function Scheduling({ title, content, next }: SchedulingParams) {
   const navigate = useNavigate();
-  const { selectedServices, selectedVehicles, time, date } =
-    useContext(GlobalContext);
+  const {
+    selectedServices,
+    selectedVehicles,
+    time,
+    date,
+    setSelectedServices,
+    setSelectedVehicles,
+    setDate,
+    setSelectedVehiclesNames,
+    setSelectedServicesNames,
+  } = useContext(GlobalContext);
   const [successMessage, setSuccessMessage] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<boolean>(false);
+  const [paid, setPaid] = useState<boolean>(false);
 
   const handleSubmit: () => void = async () => {
     const body: AppointmentBody = {
@@ -47,10 +57,16 @@ function Scheduling({ title, content, next }: SchedulingParams) {
       );
       if (response.status === 201) {
         const data = await response.json();
+        setSelectedServices?.([]);
+        setSelectedVehicles?.([]);
+        setSelectedVehiclesNames?.([]);
+        setSelectedServicesNames?.([]);
+        setDate?.(null);
         setSuccessMessage(true);
+        setPaid(false);
         setTimeout(
           () => navigate(`/appointments/${data.appointment_id}`),
-          4000
+          3000
         );
         return;
       }
@@ -72,9 +88,24 @@ function Scheduling({ title, content, next }: SchedulingParams) {
       case "date-time":
         return <DateTimeOptions />;
       case "payment":
-        return <PaymentOptions />;
+        return <PaymentOptions setPaid={setPaid} paid={paid} />;
       case "confirmation":
         return <Confirmation />;
+    }
+  };
+
+  const isDisabled: () => boolean = () => {
+    switch (content) {
+      case "service":
+        return selectedServices.length <= 0;
+      case "vehicle":
+        return selectedVehicles.length <= 0;
+      case "date-time":
+        return !date || !time;
+      case "payment":
+        return !paid;
+      default:
+        return false;
     }
   };
 
@@ -88,10 +119,24 @@ function Scheduling({ title, content, next }: SchedulingParams) {
           </h2>
         </Col>
       </Row>
-      <Row>{renderContent()}</Row>
+      <Row className="d-flex justify-content-center">{renderContent()}</Row>
+      {content === "vehicle" && (
+        <Row className="d-flex justify-content-center">
+          <Col xs={12} md={5} className="my-5 py-3 bg1">
+            <h4>Add Vehicle</h4>
+            <Button
+              variant="primary"
+              className="mt-2"
+              onClick={() => navigate("/vehicle/add")}
+            >
+              Add Vehicle
+            </Button>
+          </Col>
+        </Row>
+      )}
       {successMessage && (
         <Alert variant="success">
-          Appointment Succesfully Scheduled, you will be redirected to details
+          Appointment Successfully Scheduled, you will be redirected to details
           shortly
         </Alert>
       )}
@@ -122,6 +167,7 @@ function Scheduling({ title, content, next }: SchedulingParams) {
             <Button
               variant="primary"
               className="mt-2"
+              disabled={isDisabled()}
               onClick={() => navigate(`/scheduling/${next}`)}
             >
               Next

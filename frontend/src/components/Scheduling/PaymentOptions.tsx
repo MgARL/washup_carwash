@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 
-function PaymentOptions() {
+function PaymentOptions({ setPaid, paid }: any) {
   const {
     selectedServices,
     selectedServicesNames,
@@ -31,44 +31,44 @@ function PaymentOptions() {
     <Container className="bg2 text-center">
       <main className="mx-4">
         <Row className="bg1">
-          <Col xs={8} className="text-start">
+          <Col xs={6} md={8} className="text-start">
             <h5>Item</h5>
           </Col>
-          <Col xs={2}>
+          <Col xs={3} md={2}>
             <h5>Qty</h5>
           </Col>
-          <Col xs={2}>
+          <Col xs={3} md={2}>
             <h5>Price</h5>
           </Col>
         </Row>
         {selectedServicesNames.map((serviceName: any, index: any) => {
           return (
             <Row key={selectedServices[index]} className="app-rows">
-              <Col xs={8} className="text-start">
+              <Col xs={6} md={8} className="text-start">
                 {serviceName}
               </Col>
-              <Col xs={2}>{selectedVehicles.length}</Col>
-              <Col xs={2}>$ {servicesPrices[index]}</Col>
+              <Col xs={3} md={2}>{selectedVehicles.length}</Col>
+              <Col xs={3} md={2}>$ {servicesPrices[index]}</Col>
             </Row>
           );
         })}
         <Row>
-          <Col xs={8} className="text-end">
+          <Col xs={6} md={8} className="text-end">
             Total:
           </Col>
-          <Col xs={2}></Col>
-          <Col xs={2}>$ {calculateTotal()}</Col>
+          <Col xs={3} md={2}></Col>
+          <Col xs={3} md={2}>$ {calculateTotal()}</Col>
         </Row>
         <Row className="mt-5">
           {success && (
-            <Alert variant="success">
-              Payment Added, Please Click Next
-            </Alert>
+            <Alert variant="success">Payment Added, Please Click Next</Alert>
           )}
           <Col>
             <Button
               variant="success"
+              disabled={paid}
               onClick={() => {
+                setTimeout(() => setPaid(true), 2000);
                 setTimeout(() => setSuccess(true), 2000);
                 setTimeout(() => setSuccess(false), 6000);
               }}
