@@ -17,20 +17,14 @@
   background-color: #d9d9d9;
 }
 
-@media screen and(min-width: 1000px) {
-  .app-rows-select:hover {
-    border: 1px green solid;
-    background-color: rgba(5, 236, 5, 0.314);
-    cursor: pointer;
-  }
-  
-  .card-select:hover{
-    border: 1px rgb(10, 173, 10) solid;
-    cursor: pointer;
-  }
+.app-rows-select:hover {
+  border: 1px green solid;
+  background-color: rgba(5, 236, 5, 0.314);
+  cursor: pointer;
 }
-
-
+.card-select:hover{
+  cursor: pointer;
+}
 
 .thick-line {
   border: 2px solid black;

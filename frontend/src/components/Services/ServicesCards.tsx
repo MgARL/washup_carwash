@@ -90,7 +90,7 @@ function ServicesCards({ currentServices, type }: any) {
 
   return (
     <Row xs={1} md={3} lg={4} className="my-5 d-flex justify-content-center">
-      {allServices ? renderCards() : <p>loading</p>}
+      {allServices.length >= 0 ? renderCards() : <p>loading</p>}
     </Row>
   );
 }

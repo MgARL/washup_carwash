@@ -49,7 +49,7 @@ function AddVehicle() {
 
     setLoading(false);
     if (response.status === 200) {
-      return navigate("/profile");
+      return navigate(-1);
     }
     setErrorMessage(true);
     setTimeout(() => setErrorMessage(false), 4000);
