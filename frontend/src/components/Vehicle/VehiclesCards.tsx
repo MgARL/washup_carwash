@@ -144,7 +144,7 @@ function VehiclesCards({ currentVehicles, type }: any) {
                 </Row>
               </Card.Footer>
             )}
-            {type === "option" && (
+            {(type === "option" && currentVehicles.length > 0) && (
               <Card.Footer>
                 <Button variant="success">Select</Button>
               </Card.Footer>
