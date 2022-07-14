@@ -9,17 +9,13 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { RiDeleteBin6Line, RiEditLine } from "react-icons/ri";
 
-import removeArrValue from "../../hooks/removeArrValue";
-
 const { REACT_APP_API_URL } = process.env;
 
 function VehiclesCards({ currentVehicles, type }: any) {
   const navigate = useNavigate();
   const {
     selectedVehicles,
-    setSelectedVehicles,
-    selectedVehiclesNames,
-    setSelectedVehiclesNames,
+    setSelectedVehicles
   } = useContext(GlobalContext);
   const [allVehicles, setAllVehicles] = useState<any>(currentVehicles);
   const [noVehicles, setNoVehicles] = useState<boolean>(false);
@@ -73,23 +69,16 @@ function VehiclesCards({ currentVehicles, type }: any) {
     }
   };
 
-  const handleVehicleSelect = (
-    vehicle_id: string,
-    vehicle_make: string,
-    vehicle_model: string
-  ) => {
-    const vehicle_name = `${vehicle_make} ${vehicle_model}`;
-    if (!selectedVehicles.includes(vehicle_id)) {
-      setSelectedVehicles?.((prevState: any) => [...prevState, vehicle_id]);
-      setSelectedVehiclesNames?.((prevState: any) => [
-        ...prevState,
-        vehicle_name,
-      ]);
+  const handleVehicleSelect = (vehicle: any) => {
+    if (
+      !selectedVehicles.some((el: any) => el.vehicle_id === vehicle.vehicle_id)
+    ) {
+      setSelectedVehicles?.((prevState: any) => [...prevState, vehicle]);
     } else {
-      const newArr = removeArrValue(selectedVehicles, vehicle_id);
-      const newNameArr = removeArrValue(selectedVehiclesNames, vehicle_name);
-      setSelectedVehicles?.(newArr);
-      setSelectedVehiclesNames?.(newNameArr);
+      const newVehicleArr = selectedVehicles.filter(
+        (el: any) => el.vehicle_id !== vehicle.vehicle_id
+      );
+      setSelectedVehicles?.(newVehicleArr);
     }
   };
 
@@ -103,16 +92,15 @@ function VehiclesCards({ currentVehicles, type }: any) {
           <Card
             style={{ width: "18rem" }}
             className={`${type === "option" && "card-select"} ${
-              (selectedVehicles.includes(vehicle.vehicle_id) && type === "option" ) &&
+              selectedVehicles.some(
+                (el: any) => el.vehicle_id === vehicle.vehicle_id
+              ) &&
+              type === "option" &&
               "border border-success"
             }`}
             onClick={() => {
               if (type === "option") {
-                handleVehicleSelect(
-                  vehicle.vehicle_id,
-                  vehicle.make,
-                  vehicle.model
-                );
+                handleVehicleSelect(vehicle);
               }
             }}
           >
@@ -144,7 +132,7 @@ function VehiclesCards({ currentVehicles, type }: any) {
                 </Row>
               </Card.Footer>
             )}
-            {(type === "option" && currentVehicles.length > 0) && (
+            {type === "option" && currentVehicles.length > 0 && (
               <Card.Footer>
                 <Button variant="success">Select</Button>
               </Card.Footer>
@@ -156,7 +144,7 @@ function VehiclesCards({ currentVehicles, type }: any) {
   };
 
   return (
-    <Row xs={1} sm={2} md={3} lg={4} className='d-flex justify-content-center'>
+    <Row xs={1} sm={2} md={3} lg={4} className="d-flex justify-content-center">
       {allVehicles ? (
         renderVehicles()
       ) : noVehicles ? (

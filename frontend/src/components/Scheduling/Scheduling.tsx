@@ -28,19 +28,19 @@ function Scheduling({ title, content, next }: SchedulingParams) {
     setSelectedServices,
     setSelectedVehicles,
     setDate,
-    setSelectedVehiclesNames,
-    setSelectedServicesNames,
   } = useContext(GlobalContext);
   const [successMessage, setSuccessMessage] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<boolean>(false);
   const [paid, setPaid] = useState<boolean>(false);
 
   const handleSubmit: () => void = async () => {
+    const service_ids = selectedServices.map((service: any) => service.service_id)
+    const vehicle_ids = selectedVehicles.map((vehicle: any) => vehicle.vehicle_id)
     const body: AppointmentBody = {
       date: date?.toISOString().split("T")[0],
       time,
-      service_ids: selectedServices,
-      vehicle_ids: selectedVehicles,
+      service_ids,
+      vehicle_ids
     };
 
     try {
@@ -59,8 +59,6 @@ function Scheduling({ title, content, next }: SchedulingParams) {
         const data = await response.json();
         setSelectedServices?.([]);
         setSelectedVehicles?.([]);
-        setSelectedVehiclesNames?.([]);
-        setSelectedServicesNames?.([]);
         setDate?.(null);
         setSuccessMessage(true);
         setPaid(false);

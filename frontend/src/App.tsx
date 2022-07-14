@@ -27,10 +27,7 @@ const { REACT_APP_API_URL } = process.env;
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [selectedServices, setSelectedServices] = useState<any>([]);
-  const [servicesPrices, setServicesPrices] = useState<any>([]);
-  const [selectedServicesNames, setSelectedServicesNames] = useState<any>([]);
   const [selectedVehicles, setSelectedVehicles] = useState<any>([]);
-  const [selectedVehiclesNames, setSelectedVehiclesNames] = useState<any>([]);
   const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState<string>("08:00:00");
 
@@ -65,13 +62,7 @@ function App() {
             date,
             setDate,
             time,
-            setTime,
-            servicesPrices,
-            setServicesPrices,
-            selectedServicesNames,
-            setSelectedServicesNames,
-            selectedVehiclesNames,
-            setSelectedVehiclesNames,
+            setTime
           }}
         >
           <Navigation loggedIn={loggedIn} />

@@ -7,18 +7,12 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
-import removeArrValue from "../../hooks/removeArrValue";
-
 function ServicesCards({ currentServices, type }: any) {
   const [allServices, setAllServices] = useState<any>(currentServices);
   const [loading, setLoading] = useState<boolean>(true);
   const {
     setSelectedServices,
-    selectedServices,
-    servicesPrices,
-    setServicesPrices,
-    selectedServicesNames,
-    setSelectedServicesNames,
+    selectedServices
   } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -36,28 +30,16 @@ function ServicesCards({ currentServices, type }: any) {
     setAllServices(data.allServices);
   };
 
-  const handleServiceSelect = (
-    service_id: string,
-    service_price: any,
-    service_name: any
-  ) => {
-    if (!selectedServices.includes(service_id)) {
-      setSelectedServices?.((prevState: any) => [...prevState, service_id]);
-      setServicesPrices?.((prevState: any) => [...prevState, service_price]);
-      setSelectedServicesNames?.((prevState: any) => [
-        ...prevState,
-        service_name,
-      ]);
+  const handleServiceSelect = (service: any) => {
+    if (
+      !selectedServices.some((el: any) => el.service_id === service.service_id)
+    ) {
+      setSelectedServices?.((prevState: any) => [...prevState, service]);
     } else {
-      let newServiceArr = removeArrValue(selectedServices, service_id);
-      let newPriceArr = removeArrValue(servicesPrices, service_price);
-      let newServiceNamesArr = removeArrValue(
-        selectedServicesNames,
-        service_name
+      const newServiceArr = selectedServices.filter(
+        (el: any) => el.service_id !== service.service_id
       );
       setSelectedServices?.(newServiceArr);
-      setServicesPrices?.(newPriceArr);
-      setSelectedServicesNames?.(newServiceNamesArr);
     }
   };
 
@@ -71,17 +53,15 @@ function ServicesCards({ currentServices, type }: any) {
           <Card
             style={{ width: "18rem" }}
             className={`bg2 ${type === "option" && "card-select"} ${
-              selectedServices.includes(service.service_id) &&
+              selectedServices.some(
+                (el: any) => el.service_id === service.service_id
+              ) &&
               type === "option" &&
               "border border-success"
             }`}
             onClick={() => {
               if (type === "option") {
-                handleServiceSelect(
-                  service.service_id,
-                  service.service_price,
-                  service.service_name
-                );
+                handleServiceSelect(service);
               }
             }}
           >

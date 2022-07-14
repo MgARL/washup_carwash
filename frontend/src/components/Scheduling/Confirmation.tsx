@@ -12,10 +12,7 @@ function Confirmation() {
   const navigate = useNavigate();
   const {
     selectedServices,
-    selectedServicesNames,
     selectedVehicles,
-    selectedVehiclesNames,
-    servicesPrices,
     date,
     time,
   } = useContext(GlobalContext);
@@ -51,8 +48,8 @@ function Confirmation() {
   };
 
   const calculateTotal = () => {
-    const totalPrices = servicesPrices.map((price: number): number => {
-      return price * selectedVehicles.length;
+    const totalPrices = selectedServices.map((service: any): number => {
+      return service.service_price * selectedVehicles.length;
     });
     let total = 0;
     totalPrices.map((price: number): void => {
@@ -76,8 +73,8 @@ function Confirmation() {
       <Row className="mx-4">
         <Col xs={12}>
           <ul>
-            {selectedServicesNames.map((service: string, idx: number) => {
-              return <li key={selectedServices[idx]}>{service}</li>;
+            {selectedServices.map((service: any) => {
+              return <li key={service.service_id}>{service.service_name}</li>;
             })}
           </ul>
         </Col>
@@ -119,8 +116,8 @@ function Confirmation() {
       <Row className="mx-5">
         <Col xs={12}>
           <ul>
-            {selectedVehiclesNames.map((vehicleName: string, idx: number) => {
-              return <li key={selectedVehicles[idx]}>{vehicleName}</li>;
+            {selectedVehicles.map((vehicle: any) => {
+              return <li key={vehicle.vehicle_id}>{`${vehicle.year} ${vehicle.make} ${vehicle.model}`}</li>;
             })}
           </ul>
         </Col>

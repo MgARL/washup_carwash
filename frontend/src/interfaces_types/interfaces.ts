@@ -39,12 +39,6 @@ export interface GlobalContextInterface {
   setDate?: Dispatch<SetStateAction<Date | null>>;
   time?: string;
   setTime?: Dispatch<SetStateAction<string>>;
-  servicesPrices?: any;
-  setServicesPrices?: Dispatch<SetStateAction<any>>;
-  selectedServicesNames?: any;
-  setSelectedServicesNames?: Dispatch<SetStateAction<any>>;
-  selectedVehiclesNames?: any;
-  setSelectedVehiclesNames?: Dispatch<SetStateAction<any>>;
 }
 
 export interface AppointmentBody {

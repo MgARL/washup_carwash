@@ -10,15 +10,13 @@ import Alert from "react-bootstrap/Alert";
 function PaymentOptions({ setPaid, paid }: any) {
   const {
     selectedServices,
-    selectedServicesNames,
-    selectedVehicles,
-    servicesPrices,
+    selectedVehicles
   } = useContext(GlobalContext);
   const [success, setSuccess] = useState<boolean>(false);
 
   const calculateTotal = () => {
-    const totalPrices = servicesPrices.map((price: number): number => {
-      return price * selectedVehicles.length;
+    const totalPrices = selectedServices.map((service: any): number => {
+      return service.service_price * selectedVehicles.length;
     });
     let total = 0;
     totalPrices.map((price: number): void => {
@@ -41,14 +39,14 @@ function PaymentOptions({ setPaid, paid }: any) {
             <h5>Price</h5>
           </Col>
         </Row>
-        {selectedServicesNames.map((serviceName: any, index: any) => {
+        {selectedServices.map((service: any) => {
           return (
-            <Row key={selectedServices[index]} className="app-rows">
+            <Row key={service.service_id} className="app-rows">
               <Col xs={6} md={8} className="text-start">
-                {serviceName}
+                {service.service_name}
               </Col>
               <Col xs={3} md={2}>{selectedVehicles.length}</Col>
-              <Col xs={3} md={2}>$ {servicesPrices[index]}</Col>
+              <Col xs={3} md={2}>$ {service.service_price}</Col>
             </Row>
           );
         })}
