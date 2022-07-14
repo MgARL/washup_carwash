@@ -12,20 +12,21 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { FormInputs } from "../../interfaces_types/interfaces";
 
 // handler Functions
-import { handleOnChange, handleSubmit } from './handlers'
+import { handleOnChange, handleSubmit } from "./handlers";
 
 function Signup() {
   const navigate = useNavigate();
   const initialInputs: FormInputs = {
-    name: "",
     email: "",
-    password: "",
     address: "",
     city: "",
     state: "",
     country: "",
   };
   const [formInputs, setFormInputs] = useState<FormInputs>(initialInputs);
+  const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
+
 
   return (
     <Container className="my-5 bg1">
@@ -38,7 +39,7 @@ function Signup() {
       <Form
         className="pb-5"
         onSubmit={(e: any) => {
-          handleSubmit(e, formInputs, navigate);
+          handleSubmit(e,  name, password, formInputs, navigate);
         }}
       >
         <Form.Group controlId="signup">
@@ -47,11 +48,11 @@ function Signup() {
               <FloatingLabel controlId="name" label="Name:">
                 <Form.Control
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleOnChange(e, setFormInputs)
+                    setName((prevState: any) => e.target.value)
                   }
                   type="text"
                   maxLength={50}
-                  value={formInputs.name}
+                  value={name}
                   required
                 />
               </FloatingLabel>
@@ -77,14 +78,14 @@ function Signup() {
               <FloatingLabel controlId="password" label="Password:">
                 <Form.Control
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleOnChange(e, setFormInputs)
+                    setPassword((prevState: any) => e.target.value)
                   }
                   type="password"
                   minLength={8}
                   maxLength={255}
                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
                   title="Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
-                  value={formInputs.password}
+                  value={password}
                   required
                 />
               </FloatingLabel>

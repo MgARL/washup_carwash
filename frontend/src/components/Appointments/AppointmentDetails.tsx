@@ -97,7 +97,9 @@ function AppointmentDetails() {
           <Row>
             <Col xs={12}>Vehicles to be serviced:</Col>
             <Col xs={12} className="my-3 text-center">
-              <VehiclesCards currentVehicles={appointment.vehicles} />
+              <VehiclesCards
+                currentVehicles={appointment.vehicles}
+              />
             </Col>
           </Row>
           <hr />

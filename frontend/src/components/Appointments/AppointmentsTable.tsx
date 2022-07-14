@@ -17,6 +17,7 @@ function AppointmentsTable({appointments}: any) {
           <hr />
           {appointments.map((appointment: any) => {
             const { services, vehicles } = appointment;
+            {console.log(services)}
             return (
               <Row key={appointment.appointment_id} onClick={()=> navigate(`/appointments/${appointment.appointment_id}`)} className="app-rows app-rows-select">
                 <Col xs={6} sm={3} className=" d-flex justify-content-center align-items-center my-3">{appointment.date}</Col>

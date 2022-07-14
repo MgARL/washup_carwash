@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
 
-const { FRONT_END_URL, FRONT_END_URL_DEV } = process.env
+const { FRONT_END_URL } = process.env
 
 const admins = require('./controllers/admins')
 const users =  require('./controllers/users')
@@ -20,7 +20,7 @@ const adminAuthorization = require('./middleware/admin_auth')
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors({
-    origin: [FRONT_END_URL, FRONT_END_URL_DEV] //use array for multiple sites ie. ['google.com', 'apple.com']
+    origin: FRONT_END_URL//use array for multiple sites ie. ['google.com', 'apple.com']
 }))
 
 //  controllers

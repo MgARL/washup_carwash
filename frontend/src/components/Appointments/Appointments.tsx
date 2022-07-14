@@ -36,6 +36,7 @@ function Appointments() {
     getAppointments();
   }, []);
 
+
   return (
     <Container className="bg2">
       <Row>
