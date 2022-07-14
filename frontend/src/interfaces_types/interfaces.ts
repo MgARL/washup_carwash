@@ -1,9 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface FormInputs {
-  name: string;
   email: string;
-  password: string;
   address: string;
   city: string;
   state: string;

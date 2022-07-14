@@ -99,7 +99,6 @@ function AppointmentDetails() {
             <Col xs={12} className="my-3 text-center">
               <VehiclesCards
                 currentVehicles={appointment.vehicles}
-                type="option"
               />
             </Col>
           </Row>
