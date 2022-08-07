@@ -8,13 +8,13 @@ import AboutUs from "./AboutUs";
 
 function Landing() {
   return (
-    <Container>
+    <main>
       <Home />
       <div id="pricing">
         <ServicesCards currentServices={[]} />
       </div>
       <AboutUs />
-    </Container>
+    </main>
   );
 }
 
