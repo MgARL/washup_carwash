@@ -27,7 +27,7 @@
 }
 
 .thick-line {
-  border: 2px solid black;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
 }
 .edit{
   color: rgb(235, 100, 4);
@@ -39,4 +39,24 @@
 .clickable-icons:hover{
   cursor: pointer;
   color: rgb(64, 255, 0);
+}
+
+.separator {
+  display: flex;
+  flex-direction: row;
+}
+
+.separator:before, .separator:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+  margin: auto;
+}
+
+.separator:before {
+  margin-right: 10px;
+}
+
+.separator:after {
+  margin-left: 10px;
 }

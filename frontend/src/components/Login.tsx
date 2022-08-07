@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
-import Alert from 'react-bootstrap/Alert'
+import Alert from "react-bootstrap/Alert";
 
 // interfaces
 import { LoginInputs } from "../interfaces_types/interfaces";
@@ -25,6 +25,7 @@ function Login() {
   };
   const [formInputs, setFormInputs] = useState<LoginInputs>(initialInputs);
   const [errorMessage, setErrorMessage] = useState(false);
+  const [demoUser, setDemoUser]= useState(false);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormInputs(
@@ -37,11 +38,20 @@ function Login() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const response = await fetch(`${process.env.REACT_APP_API_URL}users/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formInputs),
-    });
+    let body: any = formInputs;
+    if(demoUser){
+      body = {
+        demo: true
+      }
+    }
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}users/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      }
+    );
     if (response.status === 200) {
       const data = await response.json();
       localStorage.setItem("token", data.token);
@@ -59,11 +69,11 @@ function Login() {
       <Row className="d-flex justify-content-center">
         <Col xs={10}>
           <h1>Login</h1>
-          <hr className="thick-line" />
         </Col>
       </Row>
+      <p className="thick-line"></p>
       <Form
-        className="pb-5"
+        className="pb-3"
         onSubmit={(e: any) => {
           handleSubmit(e);
         }}
@@ -71,7 +81,12 @@ function Login() {
         <Form.Group controlId="login">
           <Row className="d-flex justify-content-center mb-2">
             <Col xs={12} md={10}>
-          {errorMessage && <Alert variant='danger'> Wrong Credentials Please Try Again</Alert>}
+              {errorMessage && (
+                <Alert variant="danger">
+                  {" "}
+                  Wrong Credentials Please Try Again
+                </Alert>
+              )}
               <FloatingLabel controlId="email" label="Email:">
                 <Form.Control
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -109,6 +124,23 @@ function Login() {
           </Row>
         </Form.Group>
       </Form>
+      <h5 className="separator">Or</h5>
+      <Row className="mb-3">
+        <Col xs={12}>
+          <h3>Login with Demo User</h3>
+        </Col>
+      </Row>
+      <Row className="pb-3">
+        <Col xs={12}>
+          <Button variant="primary" onClick={(e: any) =>{
+            setDemoUser(true);
+            setTimeout(()=> setDemoUser(false), 3000)
+            handleSubmit(e)
+          }}>
+            Demo User
+          </Button>
+        </Col>
+      </Row>
     </Container>
   );
 }
