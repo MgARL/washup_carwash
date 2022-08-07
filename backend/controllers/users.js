@@ -52,6 +52,12 @@ users.post('/signup', async (req, res) => {
 
 users.post('/login', async (req,res) => {
     try {
+        console.log(req.body)
+        if(req.body.demo){
+            req.body.email = process.env.DEMO_USER_EMAIL;
+            req.body.password = process.env.DEMO_USER_PASSWORD;
+        }
+
         const User = await user.findOne({
             where: {
                 email: req.body.email

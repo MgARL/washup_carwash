@@ -25,7 +25,6 @@ function Login() {
   };
   const [formInputs, setFormInputs] = useState<LoginInputs>(initialInputs);
   const [errorMessage, setErrorMessage] = useState(false);
-  const [demoUser, setDemoUser]= useState(false);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormInputs(
@@ -36,7 +35,7 @@ function Login() {
     );
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: any, demoUser: boolean) => {
     e.preventDefault();
     let body: any = formInputs;
     if(demoUser){
@@ -75,7 +74,7 @@ function Login() {
       <Form
         className="pb-3"
         onSubmit={(e: any) => {
-          handleSubmit(e);
+          handleSubmit(e, false);
         }}
       >
         <Form.Group controlId="login">
@@ -133,9 +132,7 @@ function Login() {
       <Row className="pb-3">
         <Col xs={12}>
           <Button variant="primary" onClick={(e: any) =>{
-            setDemoUser(true);
-            setTimeout(()=> setDemoUser(false), 3000)
-            handleSubmit(e)
+            handleSubmit(e, true)
           }}>
             Demo User
           </Button>
