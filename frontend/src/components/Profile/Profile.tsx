@@ -11,9 +11,9 @@ import VehiclesCards from "../Vehicle/VehiclesCards";
 function Profile() {
   const navigate = useNavigate();
   return (
-    <Container className="bg2 filler py-3">
+    <main className="bg2 filler py-3">
       <Row>
-        <Col xs={12} className="text-start">
+        <Col xs={12} className="text-start ms-5">
           <h2>Profile</h2>
         </Col>
       </Row>
@@ -22,7 +22,7 @@ function Profile() {
       <Row className="vehicle-info">
         <Col xs={12}>
           <Row>
-            <Col xs={12} className="text-start">
+            <Col xs={12} className="text-start ms-5">
               <h5>Vehicle Info</h5>
             </Col>
           </Row>
@@ -39,7 +39,7 @@ function Profile() {
           </Row>
         </Col>
       </Row>
-    </Container>
+    </main>
   );
 }
 

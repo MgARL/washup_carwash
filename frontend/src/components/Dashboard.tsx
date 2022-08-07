@@ -36,9 +36,9 @@ function Dashboard() {
   }, []);
 
   return (
-    <Container className="bg2">
+    <main className="bg2">
       <Row>
-        <Col xs={12} className="text-start">
+        <Col xs={12} className="text-start ms-5">
           <h2>Upcoming Appointments</h2>
         </Col>
       </Row>
@@ -87,7 +87,7 @@ function Dashboard() {
           </Col>
         </Row>
       </Container>
-    </Container>
+    </main>
   );
 }
 

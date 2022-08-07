@@ -43,6 +43,16 @@ function ServicesCards({ currentServices, type }: any) {
     }
   };
 
+  const renderDescription = (descriptions: string[]) => {
+    return descriptions.map((description: string, idx: number) => {
+      return(
+        <Col key={idx}>
+          {description}
+        </Col>
+      )
+    })
+  }
+
   const renderCards = (): any => {
     return allServices.map((service: any) => {
       return (
@@ -67,8 +77,9 @@ function ServicesCards({ currentServices, type }: any) {
           >
             <Card.Header>{service.service_name}</Card.Header>
             <Card.Body className="bg1 card-min-height d-flex align-items-center">
-              Carwash Rims Cleaning Door and Jams Cleaning Exterior Windows
-              Cleaning
+             <Row xs={1} sm={2} style={{width: '100%'}} className="text-start">
+                {renderDescription(service.description)}
+             </Row>
               <br />
               {type === "option" && `Price: ${service.service_price}`}
             </Card.Body>

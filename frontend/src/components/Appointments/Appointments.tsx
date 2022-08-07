@@ -38,9 +38,9 @@ function Appointments() {
 
 
   return (
-    <Container className="bg2">
+    <main className="bg2">
       <Row>
-        <Col xs={12} className="text-start">
+        <Col xs={12} className="text-start ms-5">
           <h2>All Appointments</h2>
         </Col>
       </Row>
@@ -61,7 +61,7 @@ function Appointments() {
           </Col>
         </Row>
       </Container>
-    </Container>
+    </main>
   );
 }
 

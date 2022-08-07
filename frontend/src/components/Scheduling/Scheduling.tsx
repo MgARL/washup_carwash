@@ -108,8 +108,8 @@ function Scheduling({ title, content, next }: SchedulingParams) {
   };
 
   return (
-    <Container className="bg2 py-5">
-      <Row className="text-start">
+    <main className="bg2 py-5">
+      <Row className="text-start ms-5">
         <Col xs={12}>
           <h2>
             {title !== "Confirmation" && title !== "Payment" && "Choose"}{" "}
@@ -173,7 +173,7 @@ function Scheduling({ title, content, next }: SchedulingParams) {
           )}
         </Col>
       </Row>
-    </Container>
+    </main>
   );
 }
 

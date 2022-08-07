@@ -59,7 +59,7 @@ function Confirmation() {
   };
 
   return (
-    <Container className="bg2 text-start">
+    <Container className="bg2 text-start ms-5 ps-5">
       {errorMessage && (
         <Alert variant="danger">
           Something went wrong, you will be redirected to login shortly
@@ -85,8 +85,8 @@ function Confirmation() {
         </Col>
       </Row>
       <Row className="mx-5">
-        <Col xs={6}>Payment- Stripe</Col>
-        <Col xs={6}>Amount: {calculateTotal()}</Col>
+        <Col xs={6} sm={2}>Payment- Stripe</Col>
+        <Col xs={6} sm={2}>Amount: {calculateTotal()}</Col>
       </Row>
       <Row className="mx-4">
         <Col xs={12}>
