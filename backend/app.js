@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
 
-const { FRONT_END_URL } = process.env
+const { FRONT_END_URL, DEV_URL } = process.env
 
 const admins = require('./controllers/admins')
 const users =  require('./controllers/users')
