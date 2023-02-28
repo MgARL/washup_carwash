@@ -5,13 +5,13 @@ import Button from "react-bootstrap/Button";
 function NotLoggedInNav() {
   return (
     <>
-      <Nav.Link href="/#home" className="d-flex align-items-center">
+      <Nav.Link href="/washapp/#home" className="d-flex align-items-center">
         Home
       </Nav.Link>
-      <Nav.Link href="/#pricing" className="d-flex align-items-center">
+      <Nav.Link href="/washapp/#pricing" className="d-flex align-items-center">
         Pricing
       </Nav.Link>
-      <Nav.Link href="/#about-us" className="d-flex align-items-center">
+      <Nav.Link href="/washapp/#about-us" className="d-flex align-items-center">
         About Us
       </Nav.Link>
       <Nav.Link eventKey={1} as={Link} to="/signup" className="d-flex align-items-center">
